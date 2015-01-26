@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Transactions;
+using Edi.Dal.Interfaces;
+
+namespace Edi.Dal.Concrete
+{
+    /// <summary>
+    /// The Entity Framework implementation of IUnitOfWork
+    /// </summary>
+    public sealed class UnitOfWork<TContext> : IUnitOfWork<TContext>
+        where TContext : DbContext, new()
+    {
+        /// <summary>
+        /// The DbContext
+        /// </summary>
+        private DbContext _dbContext;
+
+        /// <summary>
+        /// Initializes a new UnitOfWork class
+        /// </summary>
+        /// <param name="context">The context</param>
+        public UnitOfWork()
+        {
+            _dbContext = new TContext();
+        }
+
+        /// <summary>
+        /// Saves all pending changes
+        /// </summary>
+        /// <returns>The number of objects in an Added, Modified or Deleted state</returns>
+        public int Commit()
+        {
+            // Save changes with the default options
+            return _dbContext.SaveChanges();
+        }
+
+        #region Repositories
+
+        /// <summary>
+        /// Invoice Repository
+        /// </summary>
+        private IInvoiceRepository _invoiceRepository;
+        public IInvoiceRepository InvoiceRepository
+        {
+            get { return _invoiceRepository ?? (_invoiceRepository = new InvoiceRepository(_dbContext)); }
+        }
+
+        /// <summary>
+        /// Purchase Order Repository
+        /// </summary>
+        private IPurchaseOrderRepository _purchaseOrderRepository;
+        public IPurchaseOrderRepository PurchaseOrderRepository
+        {
+            get { return _purchaseOrderRepository ?? (_purchaseOrderRepository = new PurchaseOrderRepository(_dbContext)); }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Disposes the current object
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Disposes all external resources
+        /// </summary>
+        /// <param name="disposing">The dispose indicator.</param>
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_dbContext != null)
+                {
+                    _dbContext.Dispose();
+                    _dbContext = null;
+                }
+            }
+        }
+    }
+}
