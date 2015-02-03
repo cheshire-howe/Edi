@@ -20,10 +20,8 @@ namespace Edi.Logic.Concrete
             _unitOfWork = unitOfWork;
         }
 
-        public void WriteInvoiceEdi(int id)
+        public void WriteInvoiceEdi(Invoice invoice)
         {
-            var invoice = _unitOfWork.InvoiceRepository.GetById(id);
-
             var ediDocument = new EdiDocument();
             var isa = new EdiSegment("ISA");
             isa[01] = "00";

@@ -5,7 +5,7 @@ namespace Edi.Logic.Interfaces
 {
     public interface IInvoiceLogic
     {
-        void WriteInvoiceEdi(int id);
+        void WriteInvoiceEdi(Invoice invoice);
         Invoice ConvertInvoice(FileStream fs);
     }
 }

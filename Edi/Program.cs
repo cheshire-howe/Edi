@@ -13,13 +13,17 @@ namespace Edi
 
             var fs = new FileStream(@"..\..\..\Example4_Adobe.txt", FileMode.Open, FileAccess.Read);
 
+            // Invoice Service
             var invoiceService = Get.InvoiceService;
-            invoiceService.SaveEdiFile(fs);
-            //invoiceService.WriteInvoiceEdi(1);
 
+            // Saves an incoming Invoice Edi
+            invoiceService.SaveEdiFile(fs);
+
+            // Writes an outgoing Edi to file
+            invoiceService.WriteEdiFile(1);
+
+            // Purchase Order Service
             var pol = Get.PurchaseOrderService;
-            var pos = pol.GetAll().ToList();
-            Console.WriteLine(pos.Count);
 
             /////////////////////////////////////////////////////
             // Test to read database
@@ -34,9 +38,9 @@ namespace Edi
 
             /////////////////////////////////////////////////////
 
-            pos = pol.GetAll().ToList();
+            var purchaseOrders = pol.GetAll().ToList();
 
-            foreach (var po in pos)
+            foreach (var po in purchaseOrders)
             {
                 po.Items.ToList().ForEach(x => x.Names.ToList().ForEach(y => Console.WriteLine(y.N102_Name)));
             }
