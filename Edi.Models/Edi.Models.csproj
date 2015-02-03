@@ -56,6 +56,7 @@
     <Compile Include="InvoiceModels\InvoiceItem.cs" />
     <Compile Include="InvoiceModels\InvoiceNote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseOrderModels\Ctt.cs" />
     <Compile Include="PurchaseOrderModels\PoDtm.cs" />
     <Compile Include="PurchaseOrderModels\PoItem.cs" />
     <Compile Include="PurchaseOrderModels\PoItemDtm.cs" />

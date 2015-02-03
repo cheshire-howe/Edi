@@ -9,6 +9,8 @@ using Edi.Models.InvoiceModels;
 using Edi.Models.PurchaseOrderModels;
 using Edi.Service.Concrete;
 using Edi.Service.Interfaces;
+//using Edi.Service.Concrete;
+//using Edi.Service.Interfaces;
 
 namespace Edi
 {
@@ -45,7 +47,7 @@ namespace Edi
             builder.RegisterType<InvoiceService>().As<IInvoiceService>();
             builder.RegisterType<InvoiceLogic>().As<IInvoiceLogic>();
             builder.RegisterType<PurchaseOrderService>().As<IPurchaseOrderService>();
-            builder.RegisterType<PurchaseOrderLogic>();
+            builder.RegisterType<PurchaseOrderLogic>().As<IPurchaseOrderLogic>();
 
             Container = builder.Build();
         }

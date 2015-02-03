@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Edi.Models.PurchaseOrderModels;
+using System.IO;
 
 namespace Edi.Service.Interfaces
 {
     public interface IPurchaseOrderService : IEntityService<PurchaseOrder>
     {
+        PurchaseOrder GetById(int id);
+        void SavePOEdiFile(FileStream fs);
+        void WritePOEdiFile(int id);        
     }
 }

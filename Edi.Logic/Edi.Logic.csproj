@@ -56,6 +56,7 @@
     <Compile Include="Concrete\InvoiceLogic.cs" />
     <Compile Include="Concrete\PurchaseOrderLogic.cs" />
     <Compile Include="Interfaces\IInvoiceLogic.cs" />
+    <Compile Include="Interfaces\IPurchaseOrderLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

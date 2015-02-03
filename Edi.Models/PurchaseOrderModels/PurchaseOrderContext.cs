@@ -11,8 +11,8 @@ namespace Edi.Models.PurchaseOrderModels
     {
         public PurchaseOrderContext()
         {
-            //Database.SetInitializer<PurchaseOrderContext>(new CreateDatabaseIfNotExists<PurchaseOrderContext>());
-            Database.SetInitializer<PurchaseOrderContext>(new DropCreateDatabaseIfModelChanges<PurchaseOrderContext>());
+            Database.SetInitializer<PurchaseOrderContext>(new CreateDatabaseIfNotExists<PurchaseOrderContext>());
+            //Database.SetInitializer<PurchaseOrderContext>(new DropCreateDatabaseIfModelChanges<PurchaseOrderContext>());
             //Database.SetInitializer<PurchaseOrderContext>(new DropCreateDatabaseAlways<PurchaseOrderContext>());
             //Database.SetInitializer<PurchaseOrderContext>(new DBInitializer());
         }
