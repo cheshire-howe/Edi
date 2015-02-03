@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Edi.Models.InvoiceModels.Invoice>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIG01_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIG02_InvoiceNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIG03_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIG04_PurchaseOrderNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIG04_TransactionTypeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIG08_TransactionSetPurposeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CUR01_CurrencyEntityIdentifierCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CUR02_CurrencyCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CUR03_ExchangeRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ITD01_TermsTypeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ITD02_TermsBasisDateCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ITD07_TermsNetDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ITD12_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DTM01_DateTimeQualifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DTM02_ShipDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TDS01_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CTT01_TransactionTotals)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIG01_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIG02_InvoiceNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIG03_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIG04_PurchaseOrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIG04_TransactionTypeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIG08_TransactionSetPurposeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUR01_CurrencyEntityIdentifierCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUR02_CurrencyCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUR03_ExchangeRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITD01_TermsTypeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITD02_TermsBasisDateCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITD07_TermsNetDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITD12_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DTM01_DateTimeQualifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DTM02_ShipDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDS01_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CTT01_TransactionTotals)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

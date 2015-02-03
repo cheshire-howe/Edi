@@ -53,9 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InvoiceLogic.cs" />
+    <Compile Include="Concrete\InvoiceLogic.cs" />
+    <Compile Include="Concrete\PurchaseOrderLogic.cs" />
+    <Compile Include="Interfaces\IInvoiceLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchaseOrderLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edi.Dal\Edi.Dal.csproj">

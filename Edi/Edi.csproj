@@ -74,6 +74,10 @@
       <Project>{FF614C71-1CDC-4BAC-B174-96B1E8395D2E}</Project>
       <Name>Edi.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Edi.Service\Edi.Service.csproj">
+      <Project>{b6b14853-02af-46b9-8d1a-1ed70fbb2c4b}</Project>
+      <Name>Edi.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

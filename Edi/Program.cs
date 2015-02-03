@@ -11,21 +11,21 @@ namespace Edi
             Console.WriteLine("Starting...");
             Get.Started();
 
-            //var fs = new FileStream(@"..\..\..\Invoice.txt", FileMode.Open, FileAccess.Read);
+            var fs = new FileStream(@"..\..\..\Example4_Adobe.txt", FileMode.Open, FileAccess.Read);
 
-            var il = Get.InvoiceLogic;
-            //il.SaveInvoice(fs);
-            //il.WriteInvoiceEdi(1);
+            var invoiceService = Get.InvoiceService;
+            invoiceService.SaveEdiFile(fs);
+            //invoiceService.WriteInvoiceEdi(1);
 
-            var pol = Get.PurchaseOrderLogic;
-            var pos = pol.GetPurchaseOrders();
+            var pol = Get.PurchaseOrderService;
+            var pos = pol.GetAll().ToList();
             Console.WriteLine(pos.Count);
 
             /////////////////////////////////////////////////////
             // Test to read database
             /////////////////////////////////////////////////////
-            var repo = Get.InvoiceRepository;
-            var invoices = repo.GetAll();
+            
+            var invoices = invoiceService.GetAll();
 
             foreach (var invoice in invoices)
             {
@@ -34,8 +34,7 @@ namespace Edi
 
             /////////////////////////////////////////////////////
 
-            var por = Get.PurchaseOrderRepository;
-            pos = por.GetAll().ToList();
+            pos = pol.GetAll().ToList();
 
             foreach (var po in pos)
             {

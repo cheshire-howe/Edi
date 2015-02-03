@@ -1,0 +1,162 @@
+﻿@model Edi.Models.InvoiceModels.Invoice
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Invoice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIG01_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIG01_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIG02_InvoiceNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIG02_InvoiceNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIG03_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIG03_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIG04_PurchaseOrderNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIG04_PurchaseOrderNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIG04_TransactionTypeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIG04_TransactionTypeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIG08_TransactionSetPurposeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIG08_TransactionSetPurposeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUR01_CurrencyEntityIdentifierCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUR01_CurrencyEntityIdentifierCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUR02_CurrencyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUR02_CurrencyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUR03_ExchangeRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUR03_ExchangeRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ITD01_TermsTypeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ITD01_TermsTypeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ITD02_TermsBasisDateCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ITD02_TermsBasisDateCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ITD07_TermsNetDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ITD07_TermsNetDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ITD12_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ITD12_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DTM01_DateTimeQualifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DTM01_DateTimeQualifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DTM02_ShipDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DTM02_ShipDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TDS01_Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDS01_Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CTT01_TransactionTotals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CTT01_TransactionTotals)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Edi.Dal.Interfaces;
+using Edi.Logic.Interfaces;
 using Edi.Models.InvoiceModels;
 using EdiTools;
 using OopFactory.X12.Parsing;
 using OopFactory.X12.Parsing.Model;
 
-namespace Edi.Logic
+namespace Edi.Logic.Concrete
 {
-    public class InvoiceLogic
+    public class InvoiceLogic : IInvoiceLogic
     {
         private readonly IUnitOfWork<InvoiceContext> _unitOfWork;
 
@@ -213,7 +214,7 @@ namespace Edi.Logic
             ediDocument.Save(@"..\..\..\Invoice.txt");
         }
 
-        public void SaveInvoice(FileStream fs)
+        public Invoice ConvertInvoice(FileStream fs)
         {
             var parser = new X12Parser();
             var interchanges = parser.ParseMultiple(fs);
@@ -226,6 +227,7 @@ namespace Edi.Logic
             var st = gs.Transactions[0];
             // Edi section BIG
             var big = st.Segments.FirstOrDefault(x => x.SegmentId == "BIG");
+            var beg = st.Segments.FirstOrDefault(x => x.SegmentId == "BEG");
             // Edi section CUR
             var cur = st.Segments.FirstOrDefault(x => x.SegmentId == "CUR");
             // Edi section ITD
@@ -278,8 +280,7 @@ namespace Edi.Logic
 
             Console.WriteLine(isa.SerializeToX12(true));
 
-            _unitOfWork.InvoiceRepository.Add(invoice);
-            _unitOfWork.Commit();
+            return invoice;
         }
 
         private List<InvoiceRef> ExtractRefs(List<Segment> invref)

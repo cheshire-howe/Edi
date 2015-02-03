@@ -16,6 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{EE08A926-C
 		libs\OopFactory.X12.dll = libs\OopFactory.X12.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Service", "Edi.Service\Edi.Service.csproj", "{B6B14853-02AF-46B9-8D1A-1ED70FBB2C4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.WebUI", "Edi.WebUI\Edi.WebUI.csproj", "{D87BAF95-46AA-417C-BF63-85E63E63A118}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +42,14 @@ Global
 		{9C06C12B-B256-4D94-8F87-DA54E5E7B631}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C06C12B-B256-4D94-8F87-DA54E5E7B631}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C06C12B-B256-4D94-8F87-DA54E5E7B631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B14853-02AF-46B9-8D1A-1ED70FBB2C4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B14853-02AF-46B9-8D1A-1ED70FBB2C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B14853-02AF-46B9-8D1A-1ED70FBB2C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B14853-02AF-46B9-8D1A-1ED70FBB2C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D87BAF95-46AA-417C-BF63-85E63E63A118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D87BAF95-46AA-417C-BF63-85E63E63A118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D87BAF95-46AA-417C-BF63-85E63E63A118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D87BAF95-46AA-417C-BF63-85E63E63A118}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

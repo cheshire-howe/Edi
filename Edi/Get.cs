@@ -3,8 +3,12 @@ using Edi.Dal.Abstract;
 using Edi.Dal.Concrete;
 using Edi.Dal.Interfaces;
 using Edi.Logic;
+using Edi.Logic.Concrete;
+using Edi.Logic.Interfaces;
 using Edi.Models.InvoiceModels;
 using Edi.Models.PurchaseOrderModels;
+using Edi.Service.Concrete;
+using Edi.Service.Interfaces;
 
 namespace Edi
 {
@@ -22,14 +26,14 @@ namespace Edi
             get { return Container.Resolve<IUnitOfWork<PurchaseOrderContext>>().PurchaseOrderRepository; }
         }
 
-        public static InvoiceLogic InvoiceLogic
+        public static IInvoiceService InvoiceService
         {
-            get { return Container.Resolve<InvoiceLogic>(); }
+            get { return Container.Resolve<IInvoiceService>(); }
         }
 
-        public static PurchaseOrderLogic PurchaseOrderLogic
+        public static IPurchaseOrderService PurchaseOrderService
         {
-            get { return Container.Resolve<PurchaseOrderLogic>(); }
+            get { return Container.Resolve<IPurchaseOrderService>(); }
         }
 
         public static void Started()
@@ -38,7 +42,9 @@ namespace Edi
 
             builder.RegisterGeneric(typeof(UnitOfWork<>)).As(typeof(IUnitOfWork<>));
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>));
-            builder.RegisterType<InvoiceLogic>();
+            builder.RegisterType<InvoiceService>().As<IInvoiceService>();
+            builder.RegisterType<InvoiceLogic>().As<IInvoiceLogic>();
+            builder.RegisterType<PurchaseOrderService>().As<IPurchaseOrderService>();
             builder.RegisterType<PurchaseOrderLogic>();
 
             Container = builder.Build();
