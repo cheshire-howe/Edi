@@ -13,11 +13,8 @@ namespace Edi.Logic.Concrete
 {
     public class InvoiceLogic : IInvoiceLogic
     {
-        private readonly IUnitOfWork<InvoiceContext> _unitOfWork;
-
-        public InvoiceLogic(IUnitOfWork<InvoiceContext> unitOfWork)
+        public InvoiceLogic()
         {
-            _unitOfWork = unitOfWork;
         }
 
         public void WriteInvoiceEdi(Invoice invoice)
