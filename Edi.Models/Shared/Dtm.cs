@@ -15,6 +15,7 @@ namespace Edi.Models.Shared
         /// </summary>
         [MaxLength(3)]
         public string DTM01_DateTimeQualifier { get; set; }
+
         /// <summary>
         /// DTM02 - User purchase order date
         /// </summary>

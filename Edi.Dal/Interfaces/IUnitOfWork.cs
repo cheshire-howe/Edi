@@ -15,5 +15,6 @@ namespace Edi.Dal.Interfaces
         /// </summary>
         IInvoiceRepository InvoiceRepository { get; }
         IPurchaseOrderRepository PurchaseOrderRepository { get; }
+        IAcknowledgmentRepository AcknowledgmentRepository { get; }
     }
 }

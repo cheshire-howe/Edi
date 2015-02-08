@@ -18,7 +18,7 @@ namespace Edi
     {
         protected static IContainer Container { get; private set; }
 
-        public static IInvoiceRepository InvoiceRepository
+        /*public static IInvoiceRepository InvoiceRepository
         {
             get { return Container.Resolve<IUnitOfWork<InvoiceContext>>().InvoiceRepository; }
         }
@@ -28,6 +28,11 @@ namespace Edi
             get { return Container.Resolve<IUnitOfWork<PurchaseOrderContext>>().PurchaseOrderRepository; }
         }
 
+        public static IAcknowledgmentRepository AcknowledgmentRepository
+        {
+            get { return Container.Resolve<IUnitOfWork<AcknowledgmentRepository>>().AcknowledgmentRepository; }
+        }*/
+
         public static IInvoiceService InvoiceService
         {
             get { return Container.Resolve<IInvoiceService>(); }
@@ -36,6 +41,11 @@ namespace Edi
         public static IPurchaseOrderService PurchaseOrderService
         {
             get { return Container.Resolve<IPurchaseOrderService>(); }
+        }
+
+        public static IAcknowledgmentService AcknowledgmentService
+        {
+            get { return Container.Resolve<IAcknowledgmentService>(); }
         }
 
         public static void Started()
@@ -48,6 +58,8 @@ namespace Edi
             builder.RegisterType<InvoiceLogic>().As<IInvoiceLogic>();
             builder.RegisterType<PurchaseOrderService>().As<IPurchaseOrderService>();
             builder.RegisterType<PurchaseOrderLogic>().As<IPurchaseOrderLogic>();
+            builder.RegisterType<AcknowledgmentService>().As<IAcknowledgmentService>();
+            builder.RegisterType<AcknowledgmentLogic>().As<IAcknowledgmentLogic>();
 
             Container = builder.Build();
         }

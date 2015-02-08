@@ -48,9 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\GenericRepository.cs" />
+    <Compile Include="Concrete\AcknowledgmentRepository.cs" />
     <Compile Include="Concrete\InvoiceRepository.cs" />
     <Compile Include="Concrete\PurchaseOrderRepository.cs" />
     <Compile Include="Concrete\UnitOfWork.cs" />
+    <Compile Include="Interfaces\IAcknowledgmentRepository.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
     <Compile Include="Interfaces\IInvoiceRepository.cs" />
     <Compile Include="Interfaces\IPurchaseOrderRepository.cs" />

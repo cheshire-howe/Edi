@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcknowledgmentModels\AckName.cs" />
+    <Compile Include="AcknowledgmentModels\Acknowledgment.cs" />
+    <Compile Include="AcknowledgmentModels\AckItem.cs" />
+    <Compile Include="AcknowledgmentModels\AcknowledgmentContext.cs" />
+    <Compile Include="AcknowledgmentModels\AckRef.cs" />
+    <Compile Include="AcknowledgmentModels\AckTd5.cs" />
     <Compile Include="InvoiceModels\Invoice.cs" />
     <Compile Include="InvoiceModels\InvoiceContext.cs" />
     <Compile Include="InvoiceModels\InvoiceName.cs" />
@@ -68,6 +74,7 @@
     <Compile Include="PurchaseOrderModels\PurchaseOrderContext.cs" />
     <Compile Include="PurchaseOrderModels\PurchaseOrder.cs" />
     <Compile Include="Shared\Dtm.cs" />
+    <Compile Include="Shared\Item.cs" />
     <Compile Include="Shared\Name.cs" />
     <Compile Include="Shared\Ref.cs" />
   </ItemGroup>

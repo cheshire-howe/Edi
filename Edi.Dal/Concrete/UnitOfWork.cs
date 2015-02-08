@@ -35,8 +35,16 @@ namespace Edi.Dal.Concrete
         /// <returns>The number of objects in an Added, Modified or Deleted state</returns>
         public int Commit()
         {
+            try
+            {
+                return _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
             // Save changes with the default options
-            return _dbContext.SaveChanges();
         }
 
         #region Repositories
@@ -57,6 +65,17 @@ namespace Edi.Dal.Concrete
         public IPurchaseOrderRepository PurchaseOrderRepository
         {
             get { return _purchaseOrderRepository ?? (_purchaseOrderRepository = new PurchaseOrderRepository(_dbContext)); }
+        }
+
+        private IAcknowledgmentRepository _acknowledgmentRepository;
+
+        public IAcknowledgmentRepository AcknowledgmentRepository
+        {
+            get
+            {
+                return _acknowledgmentRepository ??
+                       (_acknowledgmentRepository = new AcknowledgmentRepository(_dbContext));
+            }
         }
 
         #endregion

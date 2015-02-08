@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Edi.Models.AcknowledgmentModels;
 
 namespace Edi
 {
@@ -12,7 +14,7 @@ namespace Edi
             Get.Started();
 
             //Invoice
-            var fs = new FileStream(@"..\..\..\Example4_Adobe.txt", FileMode.Open, FileAccess.Read);
+            /*var fs = new FileStream(@"..\..\..\Example4_Adobe.txt", FileMode.Open, FileAccess.Read);
 
             // Invoice Service
             var invoiceService = Get.InvoiceService;
@@ -27,7 +29,7 @@ namespace Edi
             // Test to read database
             /////////////////////////////////////////////////////
 
-            var invoices = invoiceService.GetAll();
+            var invoices = invoiceService.GetAll().ToList();
 
             foreach (var invoice in invoices)
             {
@@ -44,25 +46,97 @@ namespace Edi
             purchaseOrderService.SavePOEdiFile(fsPo);
 
             // Writes an outgoing PO Edi to file
-            purchaseOrderService.WritePOEdiFile(1);
+            purchaseOrderService.WritePOEdiFile(1);*/
 
             /////////////////////////////////////////////////////
             // Test to read database
             /////////////////////////////////////////////////////
-            var purchaseOrders = purchaseOrderService.GetAll();
+            /*var purchaseOrders = purchaseOrderService.GetAll().ToList();
 
             foreach (var po in purchaseOrders)
             {
                 po.Names.ToList().ForEach(x => Console.WriteLine(x.N102_Name));
-            }
+            }*/
             ///////////////////////////////////////////////////
-            Console.WriteLine(purchaseOrders.ToList().Count);
+            /*Console.WriteLine(purchaseOrders.ToList().Count);*/
 
             //foreach (var po in purchaseOrders)
             //{
             //    po.Items.ToList().ForEach(x => x.Names.ToList().ForEach(y => Console.WriteLine(y.N102_Name)));
             //}
             /////////////////////////////////////////////////////
+
+
+
+            /////////////////////////////////////////////////////
+            // Test to read database
+            /////////////////////////////////////////////////////
+            var acknowledgmentService = Get.AcknowledgmentService;
+
+            var ack = new Acknowledgment()
+            {
+                AMT01_AmountQualifierCode = "sd",
+                BAK04_Date = new DateTime(2015, 1, 11),
+                AMT02_MonetaryAmount = (decimal)10.99,
+                BAK01_TransactionSetPurposeCode = "ds",
+                BAK02_AcknowledgmentType = "cs",
+                BAK03_PurchaseOrderNumber = "cx",
+                BAK05_ReleaseNumber = "cx",
+                BAK07_ContractNumber = "ax",
+                CTT01_NumberOfLineItems = 8,
+                CUR01_EntityIdentifierCode = "po",
+                CUR02_CurrencyCode = "dq",
+                AckItems = new List<AckItem>()
+                {
+                    new AckItem()
+                    {
+                        PID01_ItemDescriptionType = "o",
+                        PID05_Description = "cs",
+                        PO101_AssignedIdentification = "0000101",
+                        PO102_QuantityOrdered = 2,
+                        PO103_UnitOfMeasurement = "EA",
+                        PO104_UnitPrice = (decimal)10.99,
+                        PO105_BasisOfUnitPriceCode = "xc",
+                        PO106_ProductIdQualifier = "ds",
+                        PO107_ProductID = "xc",
+                        PO108_ProductIdQualifier = "cx",
+                        PO109_ProductID = "xc"
+                    }
+                },
+                AckNames = new List<AckName>()
+                {
+                    new AckName()
+                    {
+                        N101_EntityIdentifierCode = "ds",
+                        N102_Name = "Josh",
+                        N103_IdentificationCodeQualifier = "cx",
+                        N104_IdentificationCode = "32"
+                    }
+                },
+                AckRefs = new List<AckRef>()
+                {
+                    new AckRef()
+                    {
+                        REF01_ReferenceIdentificationQualifier = "on",
+                        REF02_ReferenceIdentification = "32",
+                        REF03_Description = "ld"
+                    }
+                },
+                AckTd5s = new List<AckTd5>()
+                {
+                    new AckTd5()
+                    {
+                        TD502_IdentificationCodeQualifier = "se",
+                        TD503_IdentificationCode = "as"
+                    }
+                }
+            };
+
+            acknowledgmentService.Create(ack);
+
+            var acks = acknowledgmentService.GetAll();
+
+            acks.ToList().ForEach(x => x.AckTd5s.ToList().ForEach(y => Console.WriteLine(y.TD503_IdentificationCode)));
 
             Console.WriteLine("Done");
             Console.ReadKey();
