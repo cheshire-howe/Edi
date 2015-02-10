@@ -9,15 +9,6 @@ namespace Edi.Models.PurchaseOrderModels
 {
     public class PurchaseOrder
     {
-        public PurchaseOrder()
-        {
-            Names = new List<PoName>();
-            Dtms = new List<PoDtm>();
-            Items = new List<PoItem>();
-            Refs = new List<PoRef>();
-            //Ctts = new List<Ctt>();
-        }
-
         public int ID { get; set; }
         /// <summary>
         /// N104 where N101 is "BY" or "BT"
@@ -68,12 +59,12 @@ namespace Edi.Models.PurchaseOrderModels
         /// </summary>
         public decimal? AMT02_Amount { get; set; }
 
-        
+        public int PoEnvelopeID { get; set; }
+        public virtual PoEnvelope PoEnvelope { get; set; }
 
         public virtual List<PoName> Names { get; set; }
         public virtual List<PoItem> Items { get; set; }
         public virtual List<PoRef> Refs { get; set; }
         public virtual List<PoDtm> Dtms { get; set; }
-        //public virtual ICollection<Ctt> Ctts { get; set; }
     }
 }

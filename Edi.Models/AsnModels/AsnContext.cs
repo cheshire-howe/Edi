@@ -11,7 +11,8 @@ namespace Edi.Models.AsnModels
     {
         public AsnContext()
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<AsnContext>());
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<AsnContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AsnContext>());
         }
 
         public DbSet<Asn> Asns { get; set; }
@@ -19,6 +20,10 @@ namespace Edi.Models.AsnModels
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("Asn");
+
+            modelBuilder.Entity<AsnEnvelope>()
+                .HasRequired(x => x.Asn)
+                .WithRequiredPrincipal(x => x.AsnEnvelope);
 
             modelBuilder.Entity<Asn>()
                 .HasRequired(x => x.Shipment)

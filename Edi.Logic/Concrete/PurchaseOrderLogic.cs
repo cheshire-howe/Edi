@@ -303,11 +303,6 @@ namespace Edi.Logic.Concrete
             var purchaseOrder = new PurchaseOrder()
             {
                 CustomerID = GetCustomerId(names),
-                //BEG01_Date = beg != null ? beg.GetDate8Element(1) : null,
-                //BEG02_InvoiceNumber = beg != null ? beg.GetElement(2) : null,
-                //BEG03_Date = beg != null ? beg.GetDate8Element(1) : null,
-                //BEG04_PurchaseOrderNumber = beg != null ? beg.GetElement(4) : null,
-                
                 BEG01_TransactionSetPurposeCode = beg != null ? beg.GetElement(1) : null,
                 BEG02_PurchaseOrderTypeCode = beg != null ? beg.GetElement(2) : null,
                 BEG03_PurchaseOrderNumber = beg != null ? beg.GetElement(3) : null,
@@ -321,7 +316,6 @@ namespace Edi.Logic.Concrete
                 Dtms = dtms,                
                 Items = items,
                 Refs = refs
-                //Ctts = ctts
             };
 
             Console.WriteLine(isa.SerializeToX12(true));
@@ -348,30 +342,6 @@ namespace Edi.Logic.Concrete
             return refs;
         }
 
-        private List<Ctt> ExtractCtts(List<Loop> cttLoop)
-        {
-            var ctts = new List<Ctt>();
-
-            foreach (var ctt in cttLoop)
-            {
-                var amt = ctt.Segments.FirstOrDefault(x => x.SegmentId == "AMT");
-                
-                var c = new Ctt();
-
-                c.CTT01_NumberofLineItems =ctt.GetIntElement(1);               
-
-                if (amt != null)
-                {
-                    c.AMT01_AmountQualifierCode = amt.GetElement(1);
-                    c.AMT02_Amount = amt.GetDecimalElement(2);
-                    //name.N202_Name = n2.GetElement(2);
-                }
-        
-                ctts.Add(c);
-            }
-
-            return ctts;
-        }
         private List<PoDtm> ExtractPoIDtms(List<Segment> poDtm)
         {
             var poIDtms = new List<PoDtm>();
@@ -472,7 +442,6 @@ namespace Edi.Logic.Concrete
                 if (n2 != null)
                 {
                     name.N201_Name = n2.GetElement(1);
-                    //name.N202_Name = n2.GetElement(2);
                 }
 
                 if (n3 != null)
@@ -534,7 +503,6 @@ namespace Edi.Logic.Concrete
                 if (n2 != null)
                 {
                     name.N201_Name = n2.GetElement(1);
-                    //name.N202_Name = n2.GetElement(2);
                 }
 
                 if (n3 != null)

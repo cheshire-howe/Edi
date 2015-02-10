@@ -8,7 +8,7 @@ namespace Edi.Models.InvoiceModels
         public InvoiceContext()
         {
             //Database.SetInitializer<InvoiceContext>(new CreateDatabaseIfNotExists<InvoiceContext>());
-            //Database.SetInitializer<InvoiceContext>(new DropCreateDatabaseIfModelChanges<InvoiceContext>());
+            Database.SetInitializer<InvoiceContext>(new DropCreateDatabaseIfModelChanges<InvoiceContext>());
             //Database.SetInitializer<InvoiceContext>(new DropCreateDatabaseAlways<InvoiceContext>());
             //Database.SetInitializer<InvoiceContext>(new SchoolDBInitializer());
         }
@@ -30,6 +30,10 @@ namespace Edi.Models.InvoiceModels
 
             modelBuilder.Entity<InvoiceNote>()
                 .ToTable("Notes");
+
+            modelBuilder.Entity<InvoiceEnvelope>()
+                .HasRequired(x => x.Invoice)
+                .WithRequiredPrincipal(x => x.InvoiceEnvelope);
 
             modelBuilder.Entity<Invoice>()
                 .Property(i => i.TDS01_Amount)

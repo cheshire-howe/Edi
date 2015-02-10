@@ -72,6 +72,9 @@ namespace Edi.Models.AcknowledgmentModels
         /// </summary>
         public decimal? AMT02_MonetaryAmount { get; set; }
 
+        public int AckEnvelopeID { get; set; }
+        public AckEnvelope AckEnvelope { get; set; }
+
         public ICollection<AckRef> AckRefs { get; set; }
         public ICollection<AckTd5> AckTd5s { get; set; }
         public ICollection<AckName> AckNames { get; set; }

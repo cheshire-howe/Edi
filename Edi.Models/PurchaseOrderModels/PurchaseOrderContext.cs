@@ -11,8 +11,8 @@ namespace Edi.Models.PurchaseOrderModels
     {
         public PurchaseOrderContext()
         {
-            Database.SetInitializer<PurchaseOrderContext>(new CreateDatabaseIfNotExists<PurchaseOrderContext>());
-            //Database.SetInitializer<PurchaseOrderContext>(new DropCreateDatabaseIfModelChanges<PurchaseOrderContext>());
+            //Database.SetInitializer<PurchaseOrderContext>(new CreateDatabaseIfNotExists<PurchaseOrderContext>());
+            Database.SetInitializer<PurchaseOrderContext>(new DropCreateDatabaseIfModelChanges<PurchaseOrderContext>());
             //Database.SetInitializer<PurchaseOrderContext>(new DropCreateDatabaseAlways<PurchaseOrderContext>());
             //Database.SetInitializer<PurchaseOrderContext>(new DBInitializer());
         }
@@ -22,6 +22,10 @@ namespace Edi.Models.PurchaseOrderModels
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("PurchaseOrders");
+
+            modelBuilder.Entity<PoEnvelope>()
+                .HasRequired(x => x.PurchaseOrder)
+                .WithRequiredPrincipal(x => x.PoEnvelope);
 
             base.OnModelCreating(modelBuilder);
         }
