@@ -21,9 +21,9 @@ namespace Edi.Models.AcknowledgmentModels
         {
             modelBuilder.HasDefaultSchema("Acknowledgment");
 
-            modelBuilder.Entity<AckEnvelope>()
-                .HasRequired(x => x.Acknowledgment)
-                .WithRequiredPrincipal(x => x.AckEnvelope);
+            modelBuilder.Entity<Acknowledgment>()
+                .HasRequired(x => x.AckEnvelope)
+                .WithRequiredPrincipal(x => x.Acknowledgment);
 
             base.OnModelCreating(modelBuilder);
         }

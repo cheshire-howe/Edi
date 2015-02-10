@@ -21,9 +21,9 @@ namespace Edi.Models.AsnModels
         {
             modelBuilder.HasDefaultSchema("Asn");
 
-            modelBuilder.Entity<AsnEnvelope>()
-                .HasRequired(x => x.Asn)
-                .WithRequiredPrincipal(x => x.AsnEnvelope);
+            modelBuilder.Entity<Asn>()
+                .HasRequired(x => x.AsnEnvelope)
+                .WithRequiredPrincipal(x => x.Asn);
 
             modelBuilder.Entity<Asn>()
                 .HasRequired(x => x.Shipment)

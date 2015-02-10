@@ -59,7 +59,6 @@ namespace Edi.Models.PurchaseOrderModels
         /// </summary>
         public decimal? AMT02_Amount { get; set; }
 
-        public int PoEnvelopeID { get; set; }
         public virtual PoEnvelope PoEnvelope { get; set; }
 
         public virtual List<PoName> Names { get; set; }

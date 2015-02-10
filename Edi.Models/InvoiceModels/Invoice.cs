@@ -99,7 +99,6 @@ namespace Edi.Models.InvoiceModels
         /// </summary>
         public int? CTT01_TransactionTotals { get; set; }
 
-        public int InvoiceEnvelopeID { get; set; }
         public InvoiceEnvelope InvoiceEnvelope { get; set; }
 
         public virtual ICollection<InvoiceNote> Notes { get; set; }

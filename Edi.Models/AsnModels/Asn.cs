@@ -65,7 +65,6 @@ namespace Edi.Models.AsnModels
         [MaxLength(80)]
         public string CTT07_Description { get; set; }
 
-        public int AsnEnvelopeID { get; set; }
         public AsnEnvelope AsnEnvelope { get; set; }
 
         public virtual ICollection<AsnDtm> AsnDtms { get; set; }

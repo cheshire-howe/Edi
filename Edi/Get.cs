@@ -18,21 +18,6 @@ namespace Edi
     {
         protected static IContainer Container { get; private set; }
 
-        /*public static IInvoiceRepository InvoiceRepository
-        {
-            get { return Container.Resolve<IUnitOfWork<InvoiceContext>>().InvoiceRepository; }
-        }
-
-        public static IPurchaseOrderRepository PurchaseOrderRepository
-        {
-            get { return Container.Resolve<IUnitOfWork<PurchaseOrderContext>>().PurchaseOrderRepository; }
-        }
-
-        public static IAcknowledgmentRepository AcknowledgmentRepository
-        {
-            get { return Container.Resolve<IUnitOfWork<AcknowledgmentRepository>>().AcknowledgmentRepository; }
-        }*/
-
         public static IInvoiceService InvoiceService
         {
             get { return Container.Resolve<IInvoiceService>(); }

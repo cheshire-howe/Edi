@@ -10,6 +10,7 @@ namespace Edi.Models.InvoiceModels
     public class InvoiceEnvelope : Isa
     {
         public int ID { get; set; }
+        public int InvoiceID { get; set; }
         public Invoice Invoice { get; set; }
     }
 }

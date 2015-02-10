@@ -23,9 +23,9 @@ namespace Edi.Models.PurchaseOrderModels
         {
             modelBuilder.HasDefaultSchema("PurchaseOrders");
 
-            modelBuilder.Entity<PoEnvelope>()
-                .HasRequired(x => x.PurchaseOrder)
-                .WithRequiredPrincipal(x => x.PoEnvelope);
+            modelBuilder.Entity<PurchaseOrder>()
+                .HasRequired(x => x.PoEnvelope)
+                .WithRequiredPrincipal(x => x.PurchaseOrder);
 
             base.OnModelCreating(modelBuilder);
         }
