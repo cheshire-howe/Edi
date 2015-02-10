@@ -48,6 +48,11 @@ namespace Edi
             get { return Container.Resolve<IAcknowledgmentService>(); }
         }
 
+        public static IAsnService AsnService
+        {
+            get { return Container.Resolve<IAsnService>(); }
+        }
+
         public static void Started()
         {
             var builder = new ContainerBuilder();
@@ -60,6 +65,7 @@ namespace Edi
             builder.RegisterType<PurchaseOrderLogic>().As<IPurchaseOrderLogic>();
             builder.RegisterType<AcknowledgmentService>().As<IAcknowledgmentService>();
             builder.RegisterType<AcknowledgmentLogic>().As<IAcknowledgmentLogic>();
+            builder.RegisterType<AsnService>().As<IAsnService>();
 
             Container = builder.Build();
         }

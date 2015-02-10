@@ -24,5 +24,14 @@ namespace Edi.Dal.Concrete
             return _dbSet
                 .FirstOrDefault(x => x.ID == id);
         }
+
+        public override IEnumerable<Acknowledgment> GetAll()
+        {
+            return _dbSet
+                .Include(x => x.AckNames)
+                .Include(x => x.AckRefs)
+                .Include(x => x.AckItems)
+                .Include(x => x.AckTd5s);
+        }
     }
 }

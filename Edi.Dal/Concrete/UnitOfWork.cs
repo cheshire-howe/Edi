@@ -78,6 +78,13 @@ namespace Edi.Dal.Concrete
             }
         }
 
+        private IAsnRepository _asnRepository;
+
+        public IAsnRepository AsnRepository
+        {
+            get { return _asnRepository ?? (_asnRepository = new AsnRepository(_dbContext)); }
+        }
+
         #endregion
 
         /// <summary>

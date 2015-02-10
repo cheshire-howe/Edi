@@ -54,9 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\AcknowledgmentLogic.cs" />
+    <Compile Include="Concrete\AsnLogic.cs" />
     <Compile Include="Concrete\InvoiceLogic.cs" />
     <Compile Include="Concrete\PurchaseOrderLogic.cs" />
     <Compile Include="Interfaces\IAcknowledgmentLogic.cs" />
+    <Compile Include="Interfaces\IAsnLogic.cs" />
     <Compile Include="Interfaces\IInvoiceLogic.cs" />
     <Compile Include="Interfaces\IPurchaseOrderLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

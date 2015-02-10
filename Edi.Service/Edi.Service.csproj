@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\AcknowledgmentService.cs" />
+    <Compile Include="Concrete\AsnService.cs" />
     <Compile Include="Concrete\InvoiceService.cs" />
     <Compile Include="Concrete\PurchaseOrderService.cs" />
     <Compile Include="Interfaces\IAcknowledgmentService.cs" />
+    <Compile Include="Interfaces\IAsnService.cs" />
     <Compile Include="Interfaces\IEntityService.cs" />
     <Compile Include="Interfaces\IInvoiceService.cs" />
     <Compile Include="Interfaces\IPurchaseOrderService.cs" />

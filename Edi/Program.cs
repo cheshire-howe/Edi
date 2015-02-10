@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Edi.Models.AcknowledgmentModels;
+using Edi.Models.AsnModels;
 
 namespace Edi
 {
@@ -132,11 +133,26 @@ namespace Edi
                 }
             };
 
-            acknowledgmentService.Create(ack);
+            //acknowledgmentService.Create(ack);
 
             var acks = acknowledgmentService.GetAll();
 
             acks.ToList().ForEach(x => x.AckTd5s.ToList().ForEach(y => Console.WriteLine(y.TD503_IdentificationCode)));
+
+
+            /////////////////////////////////////////////////////
+            // Test to read database - ASN
+            /////////////////////////////////////////////////////
+
+            var asnService = Get.AsnService;
+
+            var asn = new Asn()
+            {
+                BSN01_TransactionSetPurposeCode = "1"
+            };
+
+            asnService.Create(asn);
+
 
             Console.WriteLine("Done");
             Console.ReadKey();

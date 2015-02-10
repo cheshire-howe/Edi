@@ -13,10 +13,6 @@ namespace Edi.Logic.Concrete
 {
     public class InvoiceLogic : IInvoiceLogic
     {
-        public InvoiceLogic()
-        {
-        }
-
         public void WriteInvoiceEdi(Invoice invoice)
         {
             var ediDocument = new EdiDocument();

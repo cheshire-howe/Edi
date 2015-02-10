@@ -11,10 +11,6 @@ namespace Edi.Models.AcknowledgmentModels
     public class AckItem : Item
     {
         /// <summary>
-        /// Id
-        /// </summary>
-        public int ID { get; set; }
-        /// <summary>
         /// PID01 - Code indicating the format of the description
         /// F -> free form
         /// </summary>

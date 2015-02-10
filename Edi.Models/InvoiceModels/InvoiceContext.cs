@@ -8,7 +8,7 @@ namespace Edi.Models.InvoiceModels
         public InvoiceContext()
         {
             //Database.SetInitializer<InvoiceContext>(new CreateDatabaseIfNotExists<InvoiceContext>());
-            Database.SetInitializer<InvoiceContext>(new DropCreateDatabaseIfModelChanges<InvoiceContext>());
+            //Database.SetInitializer<InvoiceContext>(new DropCreateDatabaseIfModelChanges<InvoiceContext>());
             //Database.SetInitializer<InvoiceContext>(new DropCreateDatabaseAlways<InvoiceContext>());
             //Database.SetInitializer<InvoiceContext>(new SchoolDBInitializer());
         }

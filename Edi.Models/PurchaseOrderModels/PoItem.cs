@@ -16,7 +16,6 @@ namespace Edi.Models.PurchaseOrderModels
             Dtms = new List<PoItemDtm>();            
         }
 
-        public int ID { get; set; }
         /// <summary>
         /// CUR01 - Code identifying an organizational entity, for example - ST
         /// </summary>

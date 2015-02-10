@@ -10,6 +10,10 @@ namespace Edi.Models.Shared
     public class Item
     {
         /// <summary>
+        /// Id
+        /// </summary>
+        public int ID { get; set; }
+        /// <summary>
         /// PO101 - Alphanumeric characters assigend for differentiation
         /// wPOhin a transaction set
         /// </summary>
