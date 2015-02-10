@@ -11,6 +11,7 @@ namespace Edi
     {
         static void Main(string[] args)
         {
+            // Pulled from git
             Console.WriteLine("Starting...");
             Get.Started();
 
