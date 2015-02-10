@@ -265,7 +265,12 @@ namespace Edi.Logic.Concrete
                 Names = names,
                 Notes = notes,
                 Items = items,
-                Refs = refs
+                Refs = refs,
+                InvoiceEnvelope = new InvoiceEnvelope()
+                {
+                    ISA01_AuthInfoQualifier = "O",
+                    ISA02_AuthInfo = "k"
+                }
             };
 
             Console.WriteLine(isa.SerializeToX12(true));

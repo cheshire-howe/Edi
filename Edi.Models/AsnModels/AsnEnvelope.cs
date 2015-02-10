@@ -9,7 +9,6 @@ namespace Edi.Models.AsnModels
 {
     public class AsnEnvelope : Isa
     {
-        public int ID { get; set; }
         public int AsnID { get; set; }
         public Asn Asn { get; set; }
     }

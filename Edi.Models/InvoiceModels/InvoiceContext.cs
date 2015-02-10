@@ -31,6 +31,9 @@ namespace Edi.Models.InvoiceModels
             modelBuilder.Entity<InvoiceNote>()
                 .ToTable("Notes");
 
+            modelBuilder.Entity<InvoiceEnvelope>()
+                .HasKey(t => t.InvoiceID);
+
             modelBuilder.Entity<Invoice>()
                 .HasRequired(x => x.InvoiceEnvelope)
                 .WithRequiredPrincipal(x => x.Invoice);

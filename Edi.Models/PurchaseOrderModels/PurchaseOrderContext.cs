@@ -23,6 +23,9 @@ namespace Edi.Models.PurchaseOrderModels
         {
             modelBuilder.HasDefaultSchema("PurchaseOrders");
 
+            modelBuilder.Entity<PoEnvelope>()
+                .HasKey(x => x.PurchaseOrderID);
+
             modelBuilder.Entity<PurchaseOrder>()
                 .HasRequired(x => x.PoEnvelope)
                 .WithRequiredPrincipal(x => x.PurchaseOrder);

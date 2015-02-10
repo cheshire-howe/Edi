@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Edi.Dal.Interfaces;
+using Edi.Logic.Interfaces;
 using Edi.Models.AcknowledgmentModels;
 using Edi.Service.Interfaces;
 
@@ -12,10 +13,13 @@ namespace Edi.Service.Concrete
     public class AcknowledgmentService : IAcknowledgmentService
     {
         private readonly IUnitOfWork<AcknowledgmentContext> _unitOfWork;
+        private readonly IAcknowledgmentLogic _acknowledgmentLogic;
 
-        public AcknowledgmentService(IUnitOfWork<AcknowledgmentContext> unitOfWork)
+
+        public AcknowledgmentService(IUnitOfWork<AcknowledgmentContext> unitOfWork, IAcknowledgmentLogic acknowledgmentLogic)
         {
             _unitOfWork = unitOfWork;
+            _acknowledgmentLogic = acknowledgmentLogic;
         }
 
         public void Create(Acknowledgment entity)
