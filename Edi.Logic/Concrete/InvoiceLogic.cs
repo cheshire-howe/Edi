@@ -218,7 +218,6 @@ namespace Edi.Logic.Concrete
             var st = gs.Transactions[0];
             // Edi section BIG
             var big = st.Segments.FirstOrDefault(x => x.SegmentId == "BIG");
-            var beg = st.Segments.FirstOrDefault(x => x.SegmentId == "BEG");
             // Edi section CUR
             var cur = st.Segments.FirstOrDefault(x => x.SegmentId == "CUR");
             // Edi section ITD

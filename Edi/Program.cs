@@ -15,7 +15,7 @@ namespace Edi
             Get.Started();
 
             //Invoice
-            /*var fs = new FileStream(@"..\..\..\Example4_Adobe.txt", FileMode.Open, FileAccess.Read);
+            var fs = new FileStream(@"..\..\..\Example4_Adobe.txt", FileMode.Open, FileAccess.Read);
 
             // Invoice Service
             var invoiceService = Get.InvoiceService;
@@ -47,24 +47,24 @@ namespace Edi
             purchaseOrderService.SavePOEdiFile(fsPo);
 
             // Writes an outgoing PO Edi to file
-            purchaseOrderService.WritePOEdiFile(1);*/
+            purchaseOrderService.WritePOEdiFile(1);
 
             /////////////////////////////////////////////////////
             // Test to read database
             /////////////////////////////////////////////////////
-            /*var purchaseOrders = purchaseOrderService.GetAll().ToList();
+            var purchaseOrders = purchaseOrderService.GetAll().ToList();
 
             foreach (var po in purchaseOrders)
             {
                 po.Names.ToList().ForEach(x => Console.WriteLine(x.N102_Name));
-            }*/
+            }
             ///////////////////////////////////////////////////
-            /*Console.WriteLine(purchaseOrders.ToList().Count);*/
+            Console.WriteLine(purchaseOrders.ToList().Count);
 
-            //foreach (var po in purchaseOrders)
-            //{
-            //    po.Items.ToList().ForEach(x => x.Names.ToList().ForEach(y => Console.WriteLine(y.N102_Name)));
-            //}
+            foreach (var po in purchaseOrders)
+            {
+                po.Items.ToList().ForEach(x => x.Names.ToList().ForEach(y => Console.WriteLine(y.N102_Name)));
+            }
             /////////////////////////////////////////////////////
 
 
@@ -133,7 +133,7 @@ namespace Edi
                 }
             };
 
-            //acknowledgmentService.Create(ack);
+            acknowledgmentService.Create(ack);
 
             var acks = acknowledgmentService.GetAll();
 

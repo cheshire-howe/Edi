@@ -83,9 +83,12 @@
     <Compile Include="PurchaseOrderModels\PurchaseOrderContext.cs" />
     <Compile Include="PurchaseOrderModels\PurchaseOrder.cs" />
     <Compile Include="Shared\Dtm.cs" />
+    <Compile Include="Shared\Gs.cs" />
+    <Compile Include="Shared\Isa.cs" />
     <Compile Include="Shared\Item.cs" />
     <Compile Include="Shared\Name.cs" />
     <Compile Include="Shared\Ref.cs" />
+    <Compile Include="Shared\St.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
