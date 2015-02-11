@@ -68,6 +68,6 @@ namespace Edi.Models.AsnModels
         public AsnEnvelope AsnEnvelope { get; set; }
 
         public virtual ICollection<AsnDtm> AsnDtms { get; set; }
-        public virtual AsnHlOneShipment Shipment { get; set; }
+        public virtual ICollection<AsnHlOneShipment> Shipment { get; set; }
     }
 }

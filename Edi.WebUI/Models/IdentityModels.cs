@@ -29,7 +29,5 @@ namespace Edi.WebUI.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<Edi.Models.InvoiceModels.Invoice> Invoices { get; set; }
     }
 }

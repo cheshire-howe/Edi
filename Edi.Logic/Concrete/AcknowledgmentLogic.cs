@@ -29,7 +29,6 @@ namespace Edi.Logic.Concrete
             // Edi section CUR
             var cur = st.Segments.FirstOrDefault(x => x.SegmentId == "CUR");
             // Edi section CTT
-            //var ctt = st.Loops.Where(x => x.SegmentId == "CTT").ToList();
             var ctt = st.Loops.Where(x => x.SegmentId == "CTT").ToList()[0];
             var amt = ctt.Segments.ToList()[0];
             // Edi section N1 - loop

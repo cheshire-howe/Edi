@@ -28,10 +28,6 @@ namespace Edi.Models.AsnModels
                 .HasRequired(x => x.AsnEnvelope)
                 .WithRequiredPrincipal(x => x.Asn);
 
-            modelBuilder.Entity<Asn>()
-                .HasRequired(x => x.Shipment)
-                .WithRequiredPrincipal(x => x.Asn);
-
             base.OnModelCreating(modelBuilder);
         }
     }
