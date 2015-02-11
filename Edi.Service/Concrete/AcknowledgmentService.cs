@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,12 @@ namespace Edi.Service.Concrete
         {
             _unitOfWork.AcknowledgmentRepository.Add(entity);
             _unitOfWork.Commit();
+        }
+
+        public void SaveACKEdiFile(FileStream fs)
+        {
+            var acknowledgment = _acknowledgmentLogic.ConvertAcknowledgment(fs);
+            Create(acknowledgment);
         }
 
         public IEnumerable<Acknowledgment> GetAll()

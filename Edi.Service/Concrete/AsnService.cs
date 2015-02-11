@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Edi.Dal.Interfaces;
+using Edi.Logic.Interfaces;
 using Edi.Models.AsnModels;
 using Edi.Service.Interfaces;
 
@@ -12,10 +14,18 @@ namespace Edi.Service.Concrete
     public class AsnService : IAsnService
     {
         private readonly IUnitOfWork<AsnContext> _unitOfWork;
+        private IAsnLogic _asnLogic;
 
-        public AsnService(IUnitOfWork<AsnContext> unitOfWork)
+        public AsnService(IUnitOfWork<AsnContext> unitOfWork, IAsnLogic asnLogic)
         {
             _unitOfWork = unitOfWork;
+            _asnLogic = asnLogic;
+        }
+
+        public void SaveAsnEdiFile(FileStream fs)
+        {
+            var asn = _asnLogic.ConvertAsn(fs);
+            Create(asn);
         }
 
         public void Create(Asn entity)

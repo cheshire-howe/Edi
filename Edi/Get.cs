@@ -51,6 +51,7 @@ namespace Edi
             builder.RegisterType<AcknowledgmentService>().As<IAcknowledgmentService>();
             builder.RegisterType<AcknowledgmentLogic>().As<IAcknowledgmentLogic>();
             builder.RegisterType<AsnService>().As<IAsnService>();
+            builder.RegisterType<AsnLogic>().As<IAsnLogic>();
 
             Container = builder.Build();
         }

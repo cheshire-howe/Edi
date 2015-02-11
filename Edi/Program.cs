@@ -136,6 +136,11 @@ namespace Edi
 
             acknowledgmentService.Create(ack);
 
+
+            var fsACK = new FileStream(@"..\..\..\Example1_Adobe855.txt", FileMode.Open, FileAccess.Read);
+            // Saves an incoming Invoice Edi
+            acknowledgmentService.SaveACKEdiFile(fsACK);
+
             var acks = acknowledgmentService.GetAll();
 
             acks.ToList().ForEach(x => x.AckTd5s.ToList().ForEach(y => Console.WriteLine(y.TD503_IdentificationCode)));
@@ -145,7 +150,11 @@ namespace Edi
             // Test to read database - ASN
             /////////////////////////////////////////////////////
 
+            var asnEdi = new FileStream(@"..\..\..\Example1.txt", FileMode.Open, FileAccess.Read);
+
             var asnService = Get.AsnService;
+
+            asnService.SaveAsnEdiFile(asnEdi);
 
             var asn = new Asn()
             {
