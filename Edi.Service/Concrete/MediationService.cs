@@ -44,28 +44,24 @@ namespace Edi.Service.Concrete
                 {
                     var interchanges = _mediationLogic.GetInterchanges(file.FullName);
 
-                    var ediFileType = _mediationLogic.FindService(file, interchanges);
+                    var ediFileType = _mediationLogic.FindService(interchanges);
 
                     switch (ediFileType)
                     {
                         case 810:
                             // 810 - Invoice
-                            // Saves an incoming Invoice Edi
                             _invoiceService.SaveEdiFile(interchanges);
                             break;
                         case 850:
                             // 850 - PurchaseOrder
-                            // Saves an incoming PO Edi
                             _purchaseOrderService.SavePOEdiFile(interchanges);
                             break;
                         case 855:
                             // 855 - Acknowledgment
-                            // Saves an incoming Acknowledgment Edi
                             _acknowledgmentService.SaveACKEdiFile(interchanges);
                             break;
                         case 856:
                             // 856 - Advanced Shipping Notice
-                            // Saves an incoming Asn Edi
                             _asnService.SaveAsnEdiFile(interchanges);
                             break;
                     }

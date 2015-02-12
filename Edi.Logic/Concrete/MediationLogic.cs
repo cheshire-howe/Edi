@@ -38,7 +38,7 @@ namespace Edi.Logic.Concrete
             }
         }
 
-        public int FindService(FileInfo file, List<Interchange> interchanges)
+        public int FindService(List<Interchange> interchanges)
         {
             // Edi section ISA
             var isa = interchanges[0];
