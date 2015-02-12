@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C06C12B-B256-4D94-8F87-DA54E5E7B631}</ProjectGuid>
+    <ProjectGuid>{06523E3F-F75F-4C3D-9321-FB41BC1DC32C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Edi.Logic</RootNamespace>
-    <AssemblyName>Edi.Logic</AssemblyName>
+    <RootNamespace>Edi.Core</RootNamespace>
+    <AssemblyName>Edi.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,21 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EdiTools">
-      <HintPath>..\packages\EdiTools.1.0.2\lib\net35\EdiTools.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="OopFactory.X12">
-      <HintPath>..\libs\OopFactory.X12.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,35 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concrete\AcknowledgmentLogic.cs" />
-    <Compile Include="Concrete\AsnLogic.cs" />
-    <Compile Include="Concrete\InvoiceLogic.cs" />
-    <Compile Include="Concrete\MediationLogic.cs" />
-    <Compile Include="Concrete\PurchaseOrderLogic.cs" />
-    <Compile Include="Interfaces\IAcknowledgmentLogic.cs" />
-    <Compile Include="Interfaces\IAsnLogic.cs" />
-    <Compile Include="Interfaces\IInvoiceLogic.cs" />
-    <Compile Include="Interfaces\IMediationLogic.cs" />
-    <Compile Include="Interfaces\IPurchaseOrderLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
-      <Project>{06523e3f-f75f-4c3d-9321-fb41bc1dc32c}</Project>
-      <Name>Edi.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Edi.Dal\Edi.Dal.csproj">
-      <Project>{9b655798-03bb-450f-ae69-30d172e68da8}</Project>
-      <Name>Edi.Dal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Edi.Models\Edi.Models.csproj">
-      <Project>{ff614c71-1cdc-4bac-b174-96b1e8395d2e}</Project>
-      <Name>Edi.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

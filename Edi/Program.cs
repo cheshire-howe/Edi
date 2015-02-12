@@ -14,21 +14,21 @@ namespace Edi
             Console.WriteLine("Starting...");
             Get.Started();
 
-            //Inv();
-            //Po();
-            //Ack();
-            //Asn();
-
             // Mediation Service            
             try
             {
                 var mediationService = Get.MediationService;
-                mediationService.ProcessDirectory();
+                mediationService.DelegateFiles();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Faild to process" + ex.ToString());
             }
+
+            //Inv();
+            //Po();
+            //Ack();
+            //Asn();
 
             Console.WriteLine("Done");
             Console.ReadKey();

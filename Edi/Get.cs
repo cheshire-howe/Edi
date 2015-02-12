@@ -53,6 +53,7 @@ namespace Edi
             builder.RegisterType<AsnService>().As<IAsnService>();
             builder.RegisterType<AsnLogic>().As<IAsnLogic>();
             builder.RegisterType<MediationService>().As<IMediationService>();
+            builder.RegisterType<MediationLogic>().As<IMediationLogic>();
 
             Container = builder.Build();
         }

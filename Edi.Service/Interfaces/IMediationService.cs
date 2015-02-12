@@ -9,6 +9,6 @@ namespace Edi.Service.Interfaces
 {
     public interface IMediationService
     {
-        void ProcessDirectory();
+        void DelegateFiles();
     }
 }

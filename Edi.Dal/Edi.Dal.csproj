@@ -62,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
+      <Project>{06523e3f-f75f-4c3d-9321-fb41bc1dc32c}</Project>
+      <Name>Edi.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Edi.Models\Edi.Models.csproj">
       <Project>{ff614c71-1cdc-4bac-b174-96b1e8395d2e}</Project>
       <Name>Edi.Models</Name>
