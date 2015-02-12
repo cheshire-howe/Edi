@@ -29,16 +29,21 @@ namespace Edi.Models.Shared
         [MaxLength(4)]
         public string ISA10_Time { get; set; }
         [MaxLength(1)]
-        public string ISA11_InterchangeStandardsIdentifier { get; set; }
+        public string ISA11_InterchangeControlStandardsIdentifier { get; set; }
         [MaxLength(5)]
-        public string ISA12_InterchangeVersionNumber { get; set; }
+        public string ISA12_InterchangeControlVersionNumber { get; set; }
         [MaxLength(9)]
-        public string ISA13_InterchangeNumber { get; set; }
+        public string ISA13_InterchangeControlNumber { get; set; }
         [MaxLength(1)]
         public string ISA14_AcknowledgmentRequested { get; set; }
         [MaxLength(1)]
         public string ISA15_UsageIndicator { get; set; }
         [MaxLength(1)]
         public string ISA16_ComponentElementSeparator { get; set; }
+
+        [MaxLength(5)]
+        public string IEA01_NumberOfIncludedFunctionalGroups { get; set; }
+        [MaxLength(9)]
+        public string IEA02_InterchangeControlNumber { get; set; }
     }
 }

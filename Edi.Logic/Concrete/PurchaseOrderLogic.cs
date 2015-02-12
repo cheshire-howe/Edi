@@ -16,7 +16,7 @@ namespace Edi.Logic.Concrete
         // Dependency injection with multiple dbContexts
         // This cannot use the InvoiceRepository
         public PurchaseOrderLogic()
-        {         
+        {
         }
 
         public void WritePurchaseOrderEdi(PurchaseOrder purchaseOrder)
@@ -143,7 +143,7 @@ namespace Edi.Logic.Concrete
                 }
             }
 
-           
+
             foreach (var item in purchaseOrder.Items)
             {
                 var po1 = new EdiSegment("PO1");
@@ -159,7 +159,7 @@ namespace Edi.Logic.Concrete
                 po1[06] = item.PO106_ProductIdQualifier;
                 po1[07] = item.PO107_ProductID;
                 po1[08] = item.PO108_ProductIdQualifier;
-                po1[09] = item.PO109_ProductID;               
+                po1[09] = item.PO109_ProductID;
                 ediDocument.Segments.Add(po1);
 
                 var cur = new EdiSegment("CUR");
@@ -231,7 +231,7 @@ namespace Edi.Logic.Concrete
                 }
             }
 
-           
+
 
             var ctt = new EdiSegment("CTT");
             ctt[01] = purchaseOrder.CTT01_NumberofLineItems != null
@@ -243,7 +243,7 @@ namespace Edi.Logic.Concrete
             amt[01] = purchaseOrder.AMT02_Amount != null
                 ? purchaseOrder.AMT02_Amount.Value.ToString("0.00")
                 : "";
-            
+
             ediDocument.Segments.Add(amt);
 
             var se = new EdiSegment("SE");
@@ -280,7 +280,7 @@ namespace Edi.Logic.Concrete
             var beg = st.Segments.FirstOrDefault(x => x.SegmentId == "BEG");
             // Edi section CUR
             var cur = st.Segments.FirstOrDefault(x => x.SegmentId == "CUR");
-            
+
             // Edi section DTM
             var dtm = st.Segments.Where(x => x.SegmentId == "DTM").ToList();
             // Edi section CTT
@@ -294,6 +294,7 @@ namespace Edi.Logic.Concrete
             // Edi section REF - (ref keyword is taken so variable name can't follow convention)
             var refpo = st.Segments.Where(x => x.SegmentId == "REF").ToList();
 
+            var env = ExtractEnv(isa, gs, st);
             var names = ExtractNames(n1);
             //var ctts = ExtractCtts(ctt);
             var items = ExtractItems(po1);
@@ -302,6 +303,7 @@ namespace Edi.Logic.Concrete
 
             var purchaseOrder = new PurchaseOrder()
             {
+                PoEnvelope = env,
                 CustomerID = GetCustomerId(names),
                 BEG01_TransactionSetPurposeCode = beg != null ? beg.GetElement(1) : null,
                 BEG02_PurchaseOrderTypeCode = beg != null ? beg.GetElement(2) : null,
@@ -309,11 +311,11 @@ namespace Edi.Logic.Concrete
                 BEG05_Date = beg != null ? beg.GetDate8Element(5) : null,
                 CUR01_CurrencyEntityIdentifierCode = cur != null ? cur.GetElement(1) : null,
                 CUR02_CurrencyCode = cur != null ? cur.GetElement(2) : null,
-                CTT01_NumberofLineItems =ctt.GetIntElement(1),
+                CTT01_NumberofLineItems = ctt.GetIntElement(1),
                 AMT01_AmountQualifierCode = amt.GetElement(1),
                 AMT02_Amount = amt.GetDecimalElement(2),
                 Names = names,
-                Dtms = dtms,                
+                Dtms = dtms,
                 Items = items,
                 Refs = refs
             };
@@ -321,6 +323,48 @@ namespace Edi.Logic.Concrete
             Console.WriteLine(isa.SerializeToX12(true));
             return purchaseOrder;
 
+        }
+
+        private PoEnvelope ExtractEnv(Interchange isa, FunctionGroup gs, Transaction st)
+        {
+            return new PoEnvelope()
+            {
+                ISA01_AuthInfoQualifier = isa.AuthorInfoQualifier,
+                ISA02_AuthInfo = isa.AuthorInfo,
+                ISA03_SecurityInfoQualifier = isa.SecurityInfoQualifier,
+                ISA04_SecurityInfo = isa.SecurityInfo,
+                ISA05_InterchangeSenderIdQualifier = isa.InterchangeSenderIdQualifier,
+                ISA06_InterchangeSenderId = isa.InterchangeSenderId,
+                ISA07_InterchangeReceiverIdQualifier = isa.InterchangeReceiverIdQualifier,
+                ISA08_InterchangeReceiverId = isa.InterchangeReceiverId,
+                ISA09_Date = isa.InterchangeDate,
+
+                ISA10_Time = isa.GetElement(10),
+                ISA11_InterchangeControlStandardsIdentifier = isa.GetElement(11),
+                ISA12_InterchangeControlVersionNumber = isa.GetElement(12),
+                ISA13_InterchangeControlNumber = isa.InterchangeControlNumber,
+                ISA14_AcknowledgmentRequested = isa.GetElement(14),
+                ISA15_UsageIndicator = isa.GetElement(15),
+                ISA16_ComponentElementSeparator = isa.GetElement(16),
+                IEA01_NumberOfIncludedFunctionalGroups = (isa.TrailerSegments.ToList()[0]).GetElement(1),
+                IEA02_InterchangeControlNumber = (isa.TrailerSegments.ToList()[0]).GetElement(2),
+
+                GS01_FunctionalIdentifierCode = gs.FunctionalIdentifierCode,
+                GS02_ApplicationSenderCode = gs.ApplicationSendersCode,
+                GS03_ApplicationReceiverCode = gs.ApplicationReceiversCode,
+                GS04_Date = gs.Date,
+                GS06_GroupControlNumber = gs.ControlNumber.ToString(),
+                GS07_ResponsibleAgencyCode = gs.ResponsibleAgencyCode,
+                GS08_Version = gs.VersionIdentifierCode,
+                GS05_Time = gs.GetElement(5),
+                GE01_NumberOfTransactionSetsIncluded = (gs.TrailerSegments.ToList()[0]).GetElement(1),
+                GE02_GroupControlNumber = (gs.TrailerSegments.ToList()[0]).GetElement(2),
+
+                ST01_TransactionSetIdentifierCode = st.IdentifierCode,
+                ST02_TransactionSetControlNumber = st.ControlNumber,
+                SE01_NumberOfIncludedSegments = (st.TrailerSegments.ToList()[0]).GetElement(1),
+                SE02_TransactionSetControlNumber = (st.TrailerSegments.ToList()[0]).GetElement(2)
+            };
         }
 
         private List<PoRef> ExtractRefs(List<Segment> poref)
@@ -352,7 +396,6 @@ namespace Edi.Logic.Concrete
                 {
                     DTM01_DateTimeQualifier = seg.GetElement(1),
                     DTM02_PurchaseOrderDate = seg.GetDate8Element(2),
-                    //REF03_Description = seg.GetElement(3)
                 };
 
                 poIDtms.Add(dtm);
@@ -413,7 +456,6 @@ namespace Edi.Logic.Concrete
                 {
                     DTM01_DateTimeQualifier = seg.GetElement(1),
                     DTM02_PurchaseOrderDate = seg.GetDate8Element(2),
-                    //REF03_Description = seg.GetElement(3)
                 };
 
                 poItemDtms.Add(dtm);

@@ -15,9 +15,6 @@ namespace Edi.Logic.Concrete
     {
         public Acknowledgment ConvertAcknowledgment(List<Interchange> interchanges)
         {
-            //var parser = new X12Parser();
-            //var interchanges = parser.ParseMultiple(fs);
-
             // Edi section ISA
             var isa = interchanges[0];
             // Edi section GS
@@ -40,6 +37,7 @@ namespace Edi.Logic.Concrete
             // Edi section REF - (ref keyword is taken so variable name can't follow convention)
             var refack = st.Segments.Where(x => x.SegmentId == "REF").ToList();
 
+            var env = ExtractEnv(isa, gs, st);
             var names = ExtractNames(n1);
             var td5s = ExtractTransitDtl(td5);
             var items = ExtractItems(po1);
@@ -47,6 +45,7 @@ namespace Edi.Logic.Concrete
 
             var Acknowledgment = new Acknowledgment()
             {
+                AckEnvelope = env,
                 CustomerID = GetCustomerId(names),
                 BAK01_TransactionSetPurposeCode = bak != null ? bak.GetElement(1) : null,
                 BAK02_AcknowledgmentType = bak != null ? bak.GetElement(2) : null,
@@ -69,6 +68,49 @@ namespace Edi.Logic.Concrete
 
             return Acknowledgment;
         }
+
+        private AckEnvelope ExtractEnv(Interchange isa, FunctionGroup gs, Transaction st)
+        {
+            return new AckEnvelope()
+            {
+                ISA01_AuthInfoQualifier = isa.AuthorInfoQualifier,
+                ISA02_AuthInfo = isa.AuthorInfo,
+                ISA03_SecurityInfoQualifier = isa.SecurityInfoQualifier,
+                ISA04_SecurityInfo = isa.SecurityInfo,
+                ISA05_InterchangeSenderIdQualifier = isa.InterchangeSenderIdQualifier,
+                ISA06_InterchangeSenderId = isa.InterchangeSenderId,
+                ISA07_InterchangeReceiverIdQualifier = isa.InterchangeReceiverIdQualifier,
+                ISA08_InterchangeReceiverId = isa.InterchangeReceiverId,
+                ISA09_Date = isa.InterchangeDate,
+
+                ISA10_Time = isa.GetElement(10),
+                ISA11_InterchangeControlStandardsIdentifier = isa.GetElement(11),
+                ISA12_InterchangeControlVersionNumber = isa.GetElement(12),
+                ISA13_InterchangeControlNumber = isa.InterchangeControlNumber,
+                ISA14_AcknowledgmentRequested = isa.GetElement(14),
+                ISA15_UsageIndicator = isa.GetElement(15),
+                ISA16_ComponentElementSeparator = isa.GetElement(16),
+                IEA01_NumberOfIncludedFunctionalGroups = (isa.TrailerSegments.ToList()[0]).GetElement(1),
+                IEA02_InterchangeControlNumber = (isa.TrailerSegments.ToList()[0]).GetElement(2),
+
+                GS01_FunctionalIdentifierCode = gs.FunctionalIdentifierCode,
+                GS02_ApplicationSenderCode = gs.ApplicationSendersCode,
+                GS03_ApplicationReceiverCode = gs.ApplicationReceiversCode,
+                GS04_Date = gs.Date,
+                GS06_GroupControlNumber = gs.ControlNumber.ToString(),
+                GS07_ResponsibleAgencyCode = gs.ResponsibleAgencyCode,
+                GS08_Version = gs.VersionIdentifierCode,
+                GS05_Time = gs.GetElement(5),
+                GE01_NumberOfTransactionSetsIncluded = (gs.TrailerSegments.ToList()[0]).GetElement(1),
+                GE02_GroupControlNumber = (gs.TrailerSegments.ToList()[0]).GetElement(2),
+
+                ST01_TransactionSetIdentifierCode = st.IdentifierCode,
+                ST02_TransactionSetControlNumber = st.ControlNumber,
+                SE01_NumberOfIncludedSegments = (st.TrailerSegments.ToList()[0]).GetElement(1),
+                SE02_TransactionSetControlNumber = (st.TrailerSegments.ToList()[0]).GetElement(2)
+            };
+        }
+
         private List<AckRef> ExtractRefs(List<Segment> invref)
         {
             var refs = new List<AckRef>();

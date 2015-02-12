@@ -24,5 +24,10 @@ namespace Edi.Models.Shared
         public string GS07_ResponsibleAgencyCode { get; set; }
         [MaxLength(12)]
         public string GS08_Version { get; set; }
+
+        [MaxLength(6)]
+        public string GE01_NumberOfTransactionSetsIncluded { get; set; }
+        [MaxLength(9)]
+        public string GE02_GroupControlNumber { get; set; }
     }
 }

@@ -15,9 +15,6 @@ namespace Edi.Logic.Concrete
     {
         public Asn ConvertAsn(List<Interchange> interchanges)
         {
-            // var parser = new X12Parser();
-            // var interchanges = parser.ParseMultiple(fs);
-
             var isa = interchanges[0];
             var gs = isa.FunctionGroups.ToList()[0];
             var st = gs.Transactions[0];
@@ -67,6 +64,17 @@ namespace Edi.Logic.Concrete
                 ISA07_InterchangeReceiverIdQualifier = isa.InterchangeReceiverIdQualifier,
                 ISA08_InterchangeReceiverId = isa.InterchangeReceiverId,
                 ISA09_Date = isa.InterchangeDate,
+
+                ISA10_Time = isa.GetElement(10),
+                ISA11_InterchangeControlStandardsIdentifier = isa.GetElement(11),
+                ISA12_InterchangeControlVersionNumber = isa.GetElement(12),
+                ISA13_InterchangeControlNumber = isa.InterchangeControlNumber,
+                ISA14_AcknowledgmentRequested = isa.GetElement(14),
+                ISA15_UsageIndicator = isa.GetElement(15),
+                ISA16_ComponentElementSeparator = isa.GetElement(16),
+                IEA01_NumberOfIncludedFunctionalGroups = (isa.TrailerSegments.ToList()[0]).GetElement(1),
+                IEA02_InterchangeControlNumber = (isa.TrailerSegments.ToList()[0]).GetElement(2),
+
                 GS01_FunctionalIdentifierCode = gs.FunctionalIdentifierCode,
                 GS02_ApplicationSenderCode = gs.ApplicationSendersCode,
                 GS03_ApplicationReceiverCode = gs.ApplicationReceiversCode,
@@ -74,8 +82,14 @@ namespace Edi.Logic.Concrete
                 GS06_GroupControlNumber = gs.ControlNumber.ToString(),
                 GS07_ResponsibleAgencyCode = gs.ResponsibleAgencyCode,
                 GS08_Version = gs.VersionIdentifierCode,
+                GS05_Time = gs.GetElement(5),
+                GE01_NumberOfTransactionSetsIncluded = (gs.TrailerSegments.ToList()[0]).GetElement(1),
+                GE02_GroupControlNumber = (gs.TrailerSegments.ToList()[0]).GetElement(2),
+
                 ST01_TransactionSetIdentifierCode = st.IdentifierCode,
-                ST02_TransactionSetControlNumber = st.ControlNumber
+                ST02_TransactionSetControlNumber = st.ControlNumber,
+                SE01_NumberOfIncludedSegments = (st.TrailerSegments.ToList()[0]).GetElement(1),
+                SE02_TransactionSetControlNumber = (st.TrailerSegments.ToList()[0]).GetElement(2)
             };
         }
 

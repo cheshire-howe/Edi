@@ -207,9 +207,6 @@ namespace Edi.Logic.Concrete
 
         public Invoice ConvertInvoice(List<Interchange> interchanges)
         {
-            /*var parser = new X12Parser();
-            var interchanges = parser.ParseMultiple(fs);*/
-
             // Edi section ISA
             var isa = interchanges[0];
             // Edi section GS
@@ -237,6 +234,7 @@ namespace Edi.Logic.Concrete
             // Edi section REF - (ref keyword is taken so variable name can't follow convention)
             var refinv = st.Segments.Where(x => x.SegmentId == "REF").ToList();
 
+            var env = ExtractEnv(isa, gs, st);
             var names = ExtractNames(n1);
             var notes = ExtractNotes(nte);
             var items = ExtractItems(it1);
@@ -244,6 +242,7 @@ namespace Edi.Logic.Concrete
 
             var invoice = new Invoice()
             {
+                InvoiceEnvelope = env,
                 CustomerID = GetCustomerId(names),
                 BIG01_Date = big != null ? big.GetDate8Element(1) : null,
                 BIG02_InvoiceNumber = big != null ? big.GetElement(2) : null,
@@ -265,17 +264,54 @@ namespace Edi.Logic.Concrete
                 Names = names,
                 Notes = notes,
                 Items = items,
-                Refs = refs,
-                InvoiceEnvelope = new InvoiceEnvelope()
-                {
-                    ISA01_AuthInfoQualifier = "O",
-                    ISA02_AuthInfo = "k"
-                }
+                Refs = refs
             };
 
             Console.WriteLine(isa.SerializeToX12(true));
 
             return invoice;
+        }
+
+        private InvoiceEnvelope ExtractEnv(Interchange isa, FunctionGroup gs, Transaction st)
+        {
+            return new InvoiceEnvelope()
+            {
+                ISA01_AuthInfoQualifier = isa.AuthorInfoQualifier,
+                ISA02_AuthInfo = isa.AuthorInfo,
+                ISA03_SecurityInfoQualifier = isa.SecurityInfoQualifier,
+                ISA04_SecurityInfo = isa.SecurityInfo,
+                ISA05_InterchangeSenderIdQualifier = isa.InterchangeSenderIdQualifier,
+                ISA06_InterchangeSenderId = isa.InterchangeSenderId,
+                ISA07_InterchangeReceiverIdQualifier = isa.InterchangeReceiverIdQualifier,
+                ISA08_InterchangeReceiverId = isa.InterchangeReceiverId,
+                ISA09_Date = isa.InterchangeDate,
+
+                ISA10_Time = isa.GetElement(10),
+                ISA11_InterchangeControlStandardsIdentifier = isa.GetElement(11),
+                ISA12_InterchangeControlVersionNumber = isa.GetElement(12),
+                ISA13_InterchangeControlNumber = isa.InterchangeControlNumber,
+                ISA14_AcknowledgmentRequested = isa.GetElement(14),
+                ISA15_UsageIndicator = isa.GetElement(15),
+                ISA16_ComponentElementSeparator = isa.GetElement(16),
+                IEA01_NumberOfIncludedFunctionalGroups = (isa.TrailerSegments.ToList()[0]).GetElement(1),
+                IEA02_InterchangeControlNumber = (isa.TrailerSegments.ToList()[0]).GetElement(2),
+
+                GS01_FunctionalIdentifierCode = gs.FunctionalIdentifierCode,
+                GS02_ApplicationSenderCode = gs.ApplicationSendersCode,
+                GS03_ApplicationReceiverCode = gs.ApplicationReceiversCode,
+                GS04_Date = gs.Date,
+                GS06_GroupControlNumber = gs.ControlNumber.ToString(),
+                GS07_ResponsibleAgencyCode = gs.ResponsibleAgencyCode,
+                GS08_Version = gs.VersionIdentifierCode,
+                GS05_Time = gs.GetElement(5),
+                GE01_NumberOfTransactionSetsIncluded = (gs.TrailerSegments.ToList()[0]).GetElement(1),
+                GE02_GroupControlNumber = (gs.TrailerSegments.ToList()[0]).GetElement(2),
+
+                ST01_TransactionSetIdentifierCode = st.IdentifierCode,
+                ST02_TransactionSetControlNumber = st.ControlNumber,
+                SE01_NumberOfIncludedSegments = (st.TrailerSegments.ToList()[0]).GetElement(1),
+                SE02_TransactionSetControlNumber = (st.TrailerSegments.ToList()[0]).GetElement(2)
+            };
         }
 
         private List<InvoiceRef> ExtractRefs(List<Segment> invref)
