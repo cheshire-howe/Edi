@@ -18,11 +18,11 @@ namespace Edi.Models.Shared
         [MaxLength(10)]
         public string ISA04_SecurityInfo { get; set; }
         [MaxLength(2)]
-        public string ISA05_InterchangeIdQualifier { get; set; }
+        public string ISA05_InterchangeSenderIdQualifier { get; set; }
         [MaxLength(15)]
         public string ISA06_InterchangeSenderId { get; set; }
         [MaxLength(2)]
-        public string ISA07_InterchangeIdQualifier { get; set; }
+        public string ISA07_InterchangeReceiverIdQualifier { get; set; }
         [MaxLength(15)]
         public string ISA08_InterchangeReceiverId { get; set; }
         public DateTime? ISA09_Date { get; set; }

@@ -15,6 +15,17 @@ namespace Edi
             Console.WriteLine("Starting...");
             Get.Started();
 
+            //Inv();
+            //Po();
+            //Ack();
+            Asn();
+
+            Console.WriteLine("Done");
+            Console.ReadKey();
+        }
+
+        private static void Inv()
+        {
             //Invoice
             var fs = new FileStream(@"..\..\..\Example4_Adobe.txt", FileMode.Open, FileAccess.Read);
 
@@ -37,10 +48,13 @@ namespace Edi
             {
                 invoice.Names.ToList().ForEach(x => Console.WriteLine(x.N102_Name));
             }
+        }
 
+        private static void Po()
+        {
             //PurchaseOrder
             var fsPo = new FileStream(@"..\..\..\Example2_Adobe_TLP.txt", FileMode.Open, FileAccess.Read);
-            
+
             // PO Service
             var purchaseOrderService = Get.PurchaseOrderService;
 
@@ -67,9 +81,10 @@ namespace Edi
                 po.Items.ToList().ForEach(x => x.Names.ToList().ForEach(y => Console.WriteLine(y.N102_Name)));
             }
             /////////////////////////////////////////////////////
+        }
 
-
-
+        private static void Ack()
+        {
             /////////////////////////////////////////////////////
             // Test to read database
             /////////////////////////////////////////////////////
@@ -144,8 +159,10 @@ namespace Edi
             var acks = acknowledgmentService.GetAll();
 
             acks.ToList().ForEach(x => x.AckTd5s.ToList().ForEach(y => Console.WriteLine(y.TD503_IdentificationCode)));
+        }
 
-
+        private static void Asn()
+        {
             /////////////////////////////////////////////////////
             // Test to read database - ASN
             /////////////////////////////////////////////////////
@@ -154,18 +171,22 @@ namespace Edi
 
             var asnService = Get.AsnService;
 
-            asnService.SaveAsnEdiFile(asnEdi);
+            //asnService.SaveAsnEdiFile(asnEdi);
 
-            var asn = new Asn()
+            var b = asnService.GetAll().ToList();
+
+            foreach (var asn in b)
             {
-                BSN01_TransactionSetPurposeCode = "1"
-            };
-
-            asnService.Create(asn);
-
-
-            Console.WriteLine("Done");
-            Console.ReadKey();
+                var c = asn.Shipment.ToList();
+                foreach (var asnHlOneShipment in c)
+                {
+                    var d = asnHlOneShipment.Orders;
+                    foreach (var asnHlTwoOrder in d)
+                    {
+                        Console.WriteLine(asnHlTwoOrder.PRF01_PurchaseOrderNumber);
+                    }
+                }
+            }
         }
     }
 }
