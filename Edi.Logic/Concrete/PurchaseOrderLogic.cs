@@ -1,4 +1,6 @@
-﻿using Edi.Dal.Interfaces;
+﻿using System.Net;
+using Edi.Core;
+using Edi.Dal.Interfaces;
 using Edi.Logic.Interfaces;
 using Edi.Models.PurchaseOrderModels;
 using EdiTools;
@@ -19,7 +21,7 @@ namespace Edi.Logic.Concrete
         {
         }
 
-        public void WritePurchaseOrderEdi(PurchaseOrder purchaseOrder)
+        public string WritePurchaseOrderEdi(PurchaseOrder purchaseOrder)
         {
             var ediDocument = new EdiDocument();
             var isa = new EdiSegment("ISA");
@@ -239,8 +241,8 @@ namespace Edi.Logic.Concrete
                 : "";
             ediDocument.Segments.Add(ctt);
             var amt = new EdiSegment("AMT");
-            amt[1] = purchaseOrder.AMT01_AmountQualifierCode;
-            amt[01] = purchaseOrder.AMT02_Amount != null
+            amt[01] = purchaseOrder.AMT01_AmountQualifierCode;
+            amt[02] = purchaseOrder.AMT02_Amount != null
                 ? purchaseOrder.AMT02_Amount.Value.ToString("0.00")
                 : "";
 
@@ -263,8 +265,43 @@ namespace Edi.Logic.Concrete
 
             ediDocument.Options.SegmentTerminator = '~';
             ediDocument.Options.ElementSeparator = '*';
-            ediDocument.Save(@"..\..\..\PurchaseOrder.txt");
+
+            var filename = Path.Combine(Settings.EdiTextFileDirectory, "SENDER_" + DateTime.Now.ToString("yyyy-mm-dd_hh.mm.ss") + ".txt");
+
+            ediDocument.Save(filename);
+
+            return filename;
         }
+
+        public void SendPurchaseOrder(string filename)
+        {
+            try
+            {
+                var file = new FileInfo(filename);
+
+                using (var client = new WebClient())
+                {
+                    string ftpUsername = "", ftpPassword = "";
+                    var localFilePath = file.FullName;
+                    client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                    byte[] responseArray = client.UploadFile("ftp://ftpserver.mine.bz/" + file.Name, "STOR", localFilePath);
+
+                    // Decode and display the response.
+                    Console.WriteLine("\nResponse Received.The contents of the file uploaded are:\n{0}",
+                        System.Text.Encoding.ASCII.GetString(responseArray));
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine("Failed to upload " + ex.ToString());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("An error has occured");
+            }
+
+        }
+
         public PurchaseOrder ConvertPurchaseOrder(List<Interchange> interchanges)
         {
             /*var parser = new X12Parser();

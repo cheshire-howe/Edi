@@ -7,7 +7,8 @@ namespace Edi.Logic.Interfaces
 {
     public interface IPurchaseOrderLogic
     {        
-        void WritePurchaseOrderEdi(PurchaseOrder purchaseOrder);
+        string WritePurchaseOrderEdi(PurchaseOrder purchaseOrder);
+        void SendPurchaseOrder(string filename);
         PurchaseOrder ConvertPurchaseOrder(List<Interchange> interchanges);
     }
 }

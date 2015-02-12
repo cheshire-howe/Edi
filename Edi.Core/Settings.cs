@@ -14,10 +14,12 @@ namespace Edi.Core
         /// </summary>
         public static string ImportDirectory
         {
-            get
-            {
-                return ConfigurationManager.AppSettings["ImportDirectory"];
-            }
+            get { return ConfigurationManager.AppSettings["ImportDirectory"]; }
+        }
+
+        public static string EdiTextFileDirectory
+        {
+            get { return ConfigurationManager.AppSettings["EdiTextFileDirectory"]; }
         }
     }
 }

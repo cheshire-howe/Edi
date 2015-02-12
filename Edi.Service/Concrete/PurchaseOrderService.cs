@@ -32,7 +32,8 @@ namespace Edi.Service.Concrete
         public void WritePOEdiFile(int id)
         {
             var purchaseOrder = _unitOfWork.PurchaseOrderRepository.GetById(id);
-            _purchaseOrderLogic.WritePurchaseOrderEdi(purchaseOrder);
+            var filename = _purchaseOrderLogic.WritePurchaseOrderEdi(purchaseOrder);
+            _purchaseOrderLogic.SendPurchaseOrder(filename);
         }
 
         public void Create(PurchaseOrder entity)
