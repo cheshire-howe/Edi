@@ -14,6 +14,10 @@ namespace Edi.Models.AcknowledgmentModels
         /// </summary>
         public int ID { get; set; }
         /// <summary>
+        /// N104 where N101 is "BY" or "BT"
+        /// </summary>
+        public string CustomerID { get; set; }
+        /// <summary>
         /// BAK01 - Code identifying purpose of transaction set
         /// 00 -> Original
         /// </summary>

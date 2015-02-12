@@ -13,10 +13,10 @@ namespace Edi.Logic.Concrete
 {
     public class AsnLogic : IAsnLogic
     {
-        public Asn ConvertAsn(FileStream fs)
+        public Asn ConvertAsn(List<Interchange> interchanges)
         {
-            var parser = new X12Parser();
-            var interchanges = parser.ParseMultiple(fs);
+            // var parser = new X12Parser();
+            // var interchanges = parser.ParseMultiple(fs);
 
             var isa = interchanges[0];
             var gs = isa.FunctionGroups.ToList()[0];

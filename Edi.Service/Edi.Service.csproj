@@ -36,8 +36,13 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="OopFactory.X12, Version=3.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\OopFactory.X12.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,11 +54,13 @@
     <Compile Include="Concrete\AcknowledgmentService.cs" />
     <Compile Include="Concrete\AsnService.cs" />
     <Compile Include="Concrete\InvoiceService.cs" />
+    <Compile Include="Concrete\MediationService.cs" />
     <Compile Include="Concrete\PurchaseOrderService.cs" />
     <Compile Include="Interfaces\IAcknowledgmentService.cs" />
     <Compile Include="Interfaces\IAsnService.cs" />
     <Compile Include="Interfaces\IEntityService.cs" />
     <Compile Include="Interfaces\IInvoiceService.cs" />
+    <Compile Include="Interfaces\IMediationService.cs" />
     <Compile Include="Interfaces\IPurchaseOrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

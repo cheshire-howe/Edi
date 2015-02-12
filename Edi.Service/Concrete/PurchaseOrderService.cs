@@ -8,6 +8,7 @@ using Edi.Models.PurchaseOrderModels;
 using Edi.Service.Interfaces;
 using System.IO;
 using Edi.Logic.Interfaces;
+using OopFactory.X12.Parsing.Model;
 
 namespace Edi.Service.Concrete
 {
@@ -22,9 +23,9 @@ namespace Edi.Service.Concrete
             _purchaseOrderLogic = purchaseOrderLogic;
         }
 
-        public void SavePOEdiFile(FileStream fs)
+        public void SavePOEdiFile(List<Interchange> interchanges)
         {
-            var purchaseOrder = _purchaseOrderLogic.ConvertPurchaseOrder(fs);
+            var purchaseOrder = _purchaseOrderLogic.ConvertPurchaseOrder(interchanges);
             Create(purchaseOrder);
         }
 

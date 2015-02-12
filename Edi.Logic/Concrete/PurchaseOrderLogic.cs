@@ -265,10 +265,10 @@ namespace Edi.Logic.Concrete
             ediDocument.Options.ElementSeparator = '*';
             ediDocument.Save(@"..\..\..\PurchaseOrder.txt");
         }
-        public PurchaseOrder ConvertPurchaseOrder(FileStream fs)
+        public PurchaseOrder ConvertPurchaseOrder(List<Interchange> interchanges)
         {
-            var parser = new X12Parser();
-            var interchanges = parser.ParseMultiple(fs);
+            /*var parser = new X12Parser();
+            var interchanges = parser.ParseMultiple(fs);*/
 
             // Edi section ISA
             var isa = interchanges[0];

@@ -2,15 +2,10 @@
 using Edi.Dal.Abstract;
 using Edi.Dal.Concrete;
 using Edi.Dal.Interfaces;
-using Edi.Logic;
 using Edi.Logic.Concrete;
 using Edi.Logic.Interfaces;
-using Edi.Models.InvoiceModels;
-using Edi.Models.PurchaseOrderModels;
 using Edi.Service.Concrete;
 using Edi.Service.Interfaces;
-//using Edi.Service.Concrete;
-//using Edi.Service.Interfaces;
 
 namespace Edi
 {
@@ -38,6 +33,11 @@ namespace Edi
             get { return Container.Resolve<IAsnService>(); }
         }
 
+        public static IMediationService MediationService
+        {
+            get { return Container.Resolve<IMediationService>(); }
+        }
+
         public static void Started()
         {
             var builder = new ContainerBuilder();
@@ -52,6 +52,7 @@ namespace Edi
             builder.RegisterType<AcknowledgmentLogic>().As<IAcknowledgmentLogic>();
             builder.RegisterType<AsnService>().As<IAsnService>();
             builder.RegisterType<AsnLogic>().As<IAsnLogic>();
+            builder.RegisterType<MediationService>().As<IMediationService>();
 
             Container = builder.Build();
         }

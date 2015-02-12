@@ -8,6 +8,7 @@ using Edi.Dal.Interfaces;
 using Edi.Logic.Interfaces;
 using Edi.Models.InvoiceModels;
 using Edi.Service.Interfaces;
+using OopFactory.X12.Parsing.Model;
 
 namespace Edi.Service.Concrete
 {
@@ -22,9 +23,9 @@ namespace Edi.Service.Concrete
             _invoiceLogic = invoiceLogic;
         }
 
-        public void SaveEdiFile(FileStream fs)
+        public void SaveEdiFile(List<Interchange> interchanges)
         {
-            var invoice = _invoiceLogic.ConvertInvoice(fs);
+            var invoice = _invoiceLogic.ConvertInvoice(interchanges);
             Create(invoice);
         }
 

@@ -8,6 +8,7 @@ using Edi.Dal.Interfaces;
 using Edi.Logic.Interfaces;
 using Edi.Models.AcknowledgmentModels;
 using Edi.Service.Interfaces;
+using OopFactory.X12.Parsing.Model;
 
 namespace Edi.Service.Concrete
 {
@@ -29,9 +30,9 @@ namespace Edi.Service.Concrete
             _unitOfWork.Commit();
         }
 
-        public void SaveACKEdiFile(FileStream fs)
+        public void SaveACKEdiFile(List<Interchange> interchanges)
         {
-            var acknowledgment = _acknowledgmentLogic.ConvertAcknowledgment(fs);
+            var acknowledgment = _acknowledgmentLogic.ConvertAcknowledgment(interchanges);
             Create(acknowledgment);
         }
 

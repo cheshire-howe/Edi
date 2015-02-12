@@ -8,6 +8,7 @@ using Edi.Dal.Interfaces;
 using Edi.Logic.Interfaces;
 using Edi.Models.AsnModels;
 using Edi.Service.Interfaces;
+using OopFactory.X12.Parsing.Model;
 
 namespace Edi.Service.Concrete
 {
@@ -22,9 +23,9 @@ namespace Edi.Service.Concrete
             _asnLogic = asnLogic;
         }
 
-        public void SaveAsnEdiFile(FileStream fs)
+        public void SaveAsnEdiFile(List<Interchange> interchanges)
         {
-            var asn = _asnLogic.ConvertAsn(fs);
+            var asn = _asnLogic.ConvertAsn(interchanges);
             Create(asn);
         }
 

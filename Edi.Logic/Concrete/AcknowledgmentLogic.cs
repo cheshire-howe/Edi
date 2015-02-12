@@ -13,10 +13,10 @@ namespace Edi.Logic.Concrete
 {
     public class AcknowledgmentLogic : IAcknowledgmentLogic
     {
-        public Acknowledgment ConvertAcknowledgment(FileStream fs)
+        public Acknowledgment ConvertAcknowledgment(List<Interchange> interchanges)
         {
-            var parser = new X12Parser();
-            var interchanges = parser.ParseMultiple(fs);
+            //var parser = new X12Parser();
+            //var interchanges = parser.ParseMultiple(fs);
 
             // Edi section ISA
             var isa = interchanges[0];
@@ -47,7 +47,7 @@ namespace Edi.Logic.Concrete
 
             var Acknowledgment = new Acknowledgment()
             {
-                //CustomerID = GetCustomerId(names),
+                CustomerID = GetCustomerId(names),
                 BAK01_TransactionSetPurposeCode = bak != null ? bak.GetElement(1) : null,
                 BAK02_AcknowledgmentType = bak != null ? bak.GetElement(2) : null,
                 BAK03_PurchaseOrderNumber = bak != null ? bak.GetElement(3) : null,

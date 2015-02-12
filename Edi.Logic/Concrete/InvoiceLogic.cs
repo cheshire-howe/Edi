@@ -205,10 +205,10 @@ namespace Edi.Logic.Concrete
             ediDocument.Save(@"..\..\..\Invoice.txt");
         }
 
-        public Invoice ConvertInvoice(FileStream fs)
+        public Invoice ConvertInvoice(List<Interchange> interchanges)
         {
-            var parser = new X12Parser();
-            var interchanges = parser.ParseMultiple(fs);
+            /*var parser = new X12Parser();
+            var interchanges = parser.ParseMultiple(fs);*/
 
             // Edi section ISA
             var isa = interchanges[0];
