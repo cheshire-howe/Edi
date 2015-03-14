@@ -1,0 +1,104 @@
+﻿@model Edi.Models.PurchaseOrderModels.PurchaseOrder
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PurchaseOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BEG01_TransactionSetPurposeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BEG01_TransactionSetPurposeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BEG02_PurchaseOrderTypeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BEG02_PurchaseOrderTypeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BEG03_PurchaseOrderNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BEG03_PurchaseOrderNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BEG05_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BEG05_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUR01_CurrencyEntityIdentifierCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUR01_CurrencyEntityIdentifierCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUR02_CurrencyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUR02_CurrencyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CTT01_NumberofLineItems)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CTT01_NumberofLineItems)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AMT01_AmountQualifierCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AMT01_AmountQualifierCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AMT02_Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AMT02_Amount)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

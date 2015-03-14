@@ -13,6 +13,7 @@ namespace Edi.Service.Interfaces
     {
         PurchaseOrder GetById(int id);
         void SavePOEdiFile(List<Interchange> interchanges);
-        void WritePOEdiFile(int id);        
+        void SaveAndSend(PurchaseOrder entity, int customerId);
+        void WritePOEdiFile(int id, int customerId);        
     }
 }

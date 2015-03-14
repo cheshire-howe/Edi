@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Globalization;
+using System.Net;
 using Edi.Core;
 using Edi.Dal.Interfaces;
 using Edi.Logic.Interfaces;
@@ -21,8 +22,14 @@ namespace Edi.Logic.Concrete
         {
         }
 
-        public string WritePurchaseOrderEdi(PurchaseOrder purchaseOrder)
+        public string WritePurchaseOrderEdi(PurchaseOrder purchaseOrder, int customerId)
         {
+            string custId = customerId.ToString();
+            while (custId.Length < 8)
+            {
+                custId = "0" + custId;
+            }
+
             var ediDocument = new EdiDocument();
             var isa = new EdiSegment("ISA");
             isa[01] = "00";
@@ -30,7 +37,7 @@ namespace Edi.Logic.Concrete
             isa[03] = "00";
             isa[04] = "".PadRight(10);
             isa[05] = "ZZ";
-            isa[06] = "SENDER".PadRight(15);
+            isa[06] = custId.PadRight(15);
             isa[07] = "ZZ";
             isa[08] = "RECEIVER".PadRight(15);
             isa[09] = EdiValue.Date(6, DateTime.Now);
@@ -281,7 +288,7 @@ namespace Edi.Logic.Concrete
 
                 using (var client = new WebClient())
                 {
-                    string ftpUsername = "", ftpPassword = "";
+                    string ftpUsername = "jaspreet", ftpPassword = "foobar";
                     var localFilePath = file.FullName;
                     client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
                     byte[] responseArray = client.UploadFile("ftp://ftpserver.mine.bz/" + file.Name, "STOR", localFilePath);

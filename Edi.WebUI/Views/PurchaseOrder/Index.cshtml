@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Edi.Models.PurchaseOrderModels.PurchaseOrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BEG01_TransactionSetPurposeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BEG02_PurchaseOrderTypeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BEG03_PurchaseOrderNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BEG05_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CUR01_CurrencyEntityIdentifierCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CUR02_CurrencyCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CTT01_NumberofLineItems)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AMT01_AmountQualifierCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AMT02_Amount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BEG01_TransactionSetPurposeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BEG02_PurchaseOrderTypeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BEG03_PurchaseOrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BEG05_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUR01_CurrencyEntityIdentifierCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUR02_CurrencyCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CTT01_NumberofLineItems)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AMT01_AmountQualifierCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AMT02_Amount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

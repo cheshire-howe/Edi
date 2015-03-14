@@ -29,10 +29,16 @@ namespace Edi.Service.Concrete
             Create(purchaseOrder);
         }
 
-        public void WritePOEdiFile(int id)
+        public void SaveAndSend(PurchaseOrder entity, int customerId)
+        {
+            Create(entity);
+            WritePOEdiFile(entity.ID, customerId);
+        }
+
+        public void WritePOEdiFile(int id, int customerId)
         {
             var purchaseOrder = _unitOfWork.PurchaseOrderRepository.GetById(id);
-            var filename = _purchaseOrderLogic.WritePurchaseOrderEdi(purchaseOrder);
+            var filename = _purchaseOrderLogic.WritePurchaseOrderEdi(purchaseOrder, customerId);
             _purchaseOrderLogic.SendPurchaseOrder(filename);
         }
 

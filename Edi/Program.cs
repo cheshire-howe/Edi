@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Edi.Models.AcknowledgmentModels;
 using Edi.Models.AsnModels;
+using Edi.Models.PurchaseOrderModels;
 
 namespace Edi
 {
@@ -63,7 +64,13 @@ namespace Edi
             var purchaseOrderService = Get.PurchaseOrderService;
 
             // Writes an outgoing PO Edi to file
-            purchaseOrderService.WritePOEdiFile(1);
+            purchaseOrderService.WritePOEdiFile(1012, 1);
+
+            var po = new PurchaseOrder();
+            purchaseOrderService.Create(po);
+
+            Console.WriteLine(po.ID);
+
 
             /////////////////////////////////////////////////////
             // Test to read database

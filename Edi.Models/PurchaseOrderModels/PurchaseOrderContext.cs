@@ -28,7 +28,8 @@ namespace Edi.Models.PurchaseOrderModels
 
             modelBuilder.Entity<PurchaseOrder>()
                 .HasRequired(x => x.PoEnvelope)
-                .WithRequiredPrincipal(x => x.PurchaseOrder);
+                .WithRequiredPrincipal(x => x.PurchaseOrder)
+                .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
         }

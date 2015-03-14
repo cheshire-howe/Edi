@@ -26,7 +26,7 @@ namespace Edi.Dal.Concrete
                 .Include(x => x.Items)
                 .Include(x => x.Names)
                 .Include(x => x.Refs)
-                .FirstOrDefault();
+                .FirstOrDefault(x => x.ID == id);
         }
     }
 }
