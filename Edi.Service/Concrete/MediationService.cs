@@ -68,8 +68,11 @@ namespace Edi.Service.Concrete
                     // Made it this far, move to success directory
                     _mediationLogic.MoveFile(file, true);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(ex.TargetSite);
                     // Something went wrong, move to error directory
                     _mediationLogic.MoveFile(file, false);
                 }

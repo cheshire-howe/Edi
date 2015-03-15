@@ -330,7 +330,7 @@ namespace Edi.Logic.Concrete
             // Edi section CTT
             //var ctt = st.Loops.Where(x => x.SegmentId == "CTT").ToList();
             var ctt = st.Loops.Where(x => x.SegmentId == "CTT").ToList()[0];
-            var amt = ctt.Segments.ToList()[0];
+            var amt = ctt.Segments.ToList().Count != 0 ? ctt.Segments.ToList()[0] : null;
             // Edi section N1 - loop
             var n1 = st.Loops.Where(x => x.SegmentId == "N1").ToList();
             // Edi section IT1 - loop
@@ -355,9 +355,9 @@ namespace Edi.Logic.Concrete
                 BEG05_Date = beg != null ? beg.GetDate8Element(5) : null,
                 CUR01_CurrencyEntityIdentifierCode = cur != null ? cur.GetElement(1) : null,
                 CUR02_CurrencyCode = cur != null ? cur.GetElement(2) : null,
-                CTT01_NumberofLineItems = ctt.GetIntElement(1),
-                AMT01_AmountQualifierCode = amt.GetElement(1),
-                AMT02_Amount = amt.GetDecimalElement(2),
+                CTT01_NumberofLineItems = ctt != null ? ctt.GetIntElement(1) : null,
+                AMT01_AmountQualifierCode = amt != null ? amt.GetElement(1) : null,
+                AMT02_Amount = amt != null ? amt.GetDecimalElement(2) : null,
                 Names = names,
                 Dtms = dtms,
                 Items = items,
