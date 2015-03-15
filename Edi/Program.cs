@@ -15,7 +15,7 @@ namespace Edi
             Console.WriteLine("Starting...");
             Get.Started();
 
-            // Mediation Service            
+            // Mediation Service
             try
             {
                 var mediationService = Get.MediationService;
@@ -27,7 +27,7 @@ namespace Edi
             }
 
             //Inv();
-            Po();
+            //Po();
             //Ack();
             //Asn();
 
@@ -64,12 +64,12 @@ namespace Edi
             var purchaseOrderService = Get.PurchaseOrderService;
 
             // Writes an outgoing PO Edi to file
-            purchaseOrderService.WritePOEdiFile(1012, 1);
+            //purchaseOrderService.WritePOEdiFile(1012, 1);
 
-            var po = new PurchaseOrder();
-            purchaseOrderService.Create(po);
+            //var po = new PurchaseOrder();
+            //purchaseOrderService.Create(po);
 
-            Console.WriteLine(po.ID);
+            //Console.WriteLine(po.ID);
 
 
             /////////////////////////////////////////////////////

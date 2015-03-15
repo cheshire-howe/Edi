@@ -1,0 +1,9 @@
+﻿<div>
+    Purchase Order ID:
+    <span>
+        <a href="#/details/<%= ID %>">
+            <%= PoEnvelope.ISA06_InterchangeSenderId.replace(/\s+/g, "") +
+            PoEnvelope.ISA08_InterchangeReceiverId %>
+        </a>
+    </span>
+</div>

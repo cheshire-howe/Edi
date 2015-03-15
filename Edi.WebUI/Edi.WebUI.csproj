@@ -193,7 +193,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PurchaseOrderApiController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
@@ -215,6 +214,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\pos\collections\pos.js" />
+    <Content Include="Scripts\app\pos\components\appController.js" />
+    <Content Include="Scripts\app\pos\components\dataService.js" />
+    <Content Include="Scripts\app\pos\models\po.js" />
+    <Content Include="Scripts\app\pos\routers\router.js" />
+    <Content Include="Scripts\app\pos\views\detailsView.js" />
+    <Content Include="Scripts\app\pos\views\posView.js" />
+    <Content Include="Scripts\app\pos\views\poView.js" />
+    <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -226,8 +235,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\text.js" />
+    <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -269,11 +282,10 @@
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\Edit.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
-    <Content Include="Views\PurchaseOrder\Create.cshtml" />
-    <Content Include="Views\PurchaseOrder\Delete.cshtml" />
-    <Content Include="Views\PurchaseOrder\Details.cshtml" />
-    <Content Include="Views\PurchaseOrder\Edit.cshtml" />
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
+    <Content Include="Scripts\underscore-min.map" />
+    <Content Include="Views\PurchaseOrder\PoPartials\Details.cshtml" />
+    <Content Include="Views\PurchaseOrder\PoPartials\Po.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

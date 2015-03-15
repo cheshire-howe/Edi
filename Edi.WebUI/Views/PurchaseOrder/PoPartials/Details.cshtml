@@ -1,0 +1,33 @@
+﻿<h2>Details</h2>
+<hr />
+
+
+<h4>Items</h4>
+<div class="items">
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="3">UPC</th>
+                <th colspan="2">Quantity</th>
+                <th>Unit</th>
+                <th>Unit Price</th>
+                <th colspan="2">Item Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (var i = 0; i < Items.length; i++) { %>
+            <tr>
+                <td colspan="3"><%= Items[i].PO107_ProductID %></td>
+                <td colspan="2"><%= Items[i].PO102_QuantityOrdered %></td>
+                <td><%= Items[i].PO103_UnitOfMeasurement %></td>
+                <td><%= Items[i].PO104_UnitPrice %></td>
+                <td colspan="2"><%= Items[i].Names.N102_Name %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<div>
+<button id="btnBack" class="btn btn-default">Back</button>
+</div>
