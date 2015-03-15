@@ -1,7 +1,39 @@
 ﻿<h2>Purchase Order Details</h2>
-<hr />
 
 <div class="container">
+    <div class="row">
+        <table class="table">
+            <tr>
+                <td class="col-sm-2"><strong>Status</strong></td>
+                <td>
+                    <% if (BEG01_TransactionSetPurposeCode === "00") { %>
+                    Original
+                    <% } else if (BEG01_TransactionSetPurposeCode === "03") { %>
+                    Delete
+                    <% } else if (BEG01_TransactionSetPurposeCode === "05") { %>
+                    Replace
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-sm-2"><strong>P.O. Number</strong></td>
+                <td><%= BEG03_PurchaseOrderNumber %></td>
+            </tr>
+            <tr>
+                <td class="col-sm-2"><strong>P.O. Date</strong></td>
+                <td><%= new Date(BEG05_Date).toLocaleDateString("en-US") %></td>
+            </tr>
+            <tr>
+                <td class="col-sm-2"><strong>Delivery Date</strong></td>
+                <% if (Dtms.length > 0) { %>
+                <td><%= new Date(Dtms[0].DTM02_PurchaseOrderDate).toLocaleDateString("en-US") %></td>
+                <% } else { %>
+                <td></td>
+                <% } %>
+            </tr>
+        </table>
+        <hr />
+    </div>
     <div class="row">
         <div class="col-sm-6">
             <% for (var i = 0; i < Names.length; i++) { %>
@@ -32,9 +64,10 @@
             <% } %>
         </div>
     </div>
+    <hr />
     <div class="row">
         <div class="col-xs-12">
-            <h4>Items</h4>
+            <h4>Line Items</h4>
             <div class="items">
                 <table class="table">
                     <thead>
@@ -44,25 +77,37 @@
                             <th>Unit</th>
                             <th>Unit Price</th>
                             <th colspan="2">Item Name</th>
+                            <th>Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <% var total = 0; %>
                         <% for (var i = 0; i < Items.length; i++) { %>
                         <tr>
                             <td colspan="2"><%= Items[i].PO107_ProductID %></td>
                             <td colspan="2"><%= Items[i].PO102_QuantityOrdered %></td>
                             <td><%= Items[i].PO103_UnitOfMeasurement %></td>
-                            <td><%= Items[i].PO104_UnitPrice %></td>
+                            <td>$<%= (Items[i].PO104_UnitPrice).toFixed(2) %></td>
                             <td colspan="2"><%= Items[i].Names.N102_Name %></td>
+                            <td style="text-align: right;">$<%= (Items[i].PO102_QuantityOrdered * Items[i].PO104_UnitPrice).toFixed(2) %></td>
                         </tr>
+                        <% total += (Items[i].PO102_QuantityOrdered * Items[i].PO104_UnitPrice) %>
                         <% } %>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8" style="text-align: right;"><strong>Total:</strong></td>
+                            <td style="text-align: right;">$<%= total.toFixed(2) %></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
+        </div>
+    </div>
 
-            <div>
-                <button id="btnBack" class="btn btn-default">Back</button>
-            </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button id="btnBack" class="btn btn-default">Back</button>
         </div>
     </div>
 </div>
