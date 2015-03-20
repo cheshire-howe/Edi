@@ -92,6 +92,9 @@
     <Compile Include="Shared\Name.cs" />
     <Compile Include="Shared\Ref.cs" />
     <Compile Include="Shared\St.cs" />
+    <Compile Include="TradingPartners\Partnership.cs" />
+    <Compile Include="TradingPartners\PartnershipContext.cs" />
+    <Compile Include="TradingPartners\Vendor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

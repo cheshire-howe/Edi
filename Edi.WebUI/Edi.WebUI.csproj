@@ -194,9 +194,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PartnershipController.cs" />
     <Compile Include="Controllers\PurchaseOrderApiController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -295,6 +297,16 @@
     <Content Include="Views\Role\Delete.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Vendor\Create.cshtml" />
+    <Content Include="Views\Vendor\Delete.cshtml" />
+    <Content Include="Views\Vendor\Details.cshtml" />
+    <Content Include="Views\Vendor\Edit.cshtml" />
+    <Content Include="Views\Vendor\Index.cshtml" />
+    <Content Include="Views\Partnership\Create.cshtml" />
+    <Content Include="Views\Partnership\Delete.cshtml" />
+    <Content Include="Views\Partnership\Details.cshtml" />
+    <Content Include="Views\Partnership\Edit.cshtml" />
+    <Content Include="Views\Partnership\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

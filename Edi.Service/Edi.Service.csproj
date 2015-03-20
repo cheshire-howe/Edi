@@ -54,13 +54,17 @@
     <Compile Include="Concrete\AsnService.cs" />
     <Compile Include="Concrete\InvoiceService.cs" />
     <Compile Include="Concrete\MediationService.cs" />
+    <Compile Include="Concrete\PartnershipService.cs" />
     <Compile Include="Concrete\PurchaseOrderService.cs" />
+    <Compile Include="Concrete\VendorService.cs" />
     <Compile Include="Interfaces\IAcknowledgmentService.cs" />
     <Compile Include="Interfaces\IAsnService.cs" />
     <Compile Include="Interfaces\IEntityService.cs" />
     <Compile Include="Interfaces\IInvoiceService.cs" />
     <Compile Include="Interfaces\IMediationService.cs" />
+    <Compile Include="Interfaces\IPartnershipService.cs" />
     <Compile Include="Interfaces\IPurchaseOrderService.cs" />
+    <Compile Include="Interfaces\IVendorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -85,6 +85,24 @@ namespace Edi.Dal.Concrete
             get { return _asnRepository ?? (_asnRepository = new AsnRepository(_dbContext)); }
         }
 
+        /// <summary>
+        /// Vendor Repository
+        /// </summary>
+        private IVendorRepository _vendorRepository;
+        public IVendorRepository VendorRepository
+        {
+            get { return _vendorRepository ?? (_vendorRepository = new VendorRepository(_dbContext)); }
+        }
+
+        /// <summary>
+        /// Partnership Repository
+        /// </summary>
+        private IPartnershipRepository _partnershipRepository;
+        public IPartnershipRepository PartnershipRepository
+        {
+            get { return _partnershipRepository ?? (_partnershipRepository = new PartnershipRepository(_dbContext)); }
+        }
+
         #endregion
 
         /// <summary>

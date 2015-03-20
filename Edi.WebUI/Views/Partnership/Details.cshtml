@@ -1,0 +1,66 @@
+﻿@model Edi.Models.TradingPartners.Partnership
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Partnership</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendor.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendor.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerIDQualifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerIDQualifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerEdiID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerEdiID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorIDQualifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorIDQualifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorEdiID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorEdiID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -17,5 +17,7 @@ namespace Edi.Dal.Interfaces
         IPurchaseOrderRepository PurchaseOrderRepository { get; }
         IAcknowledgmentRepository AcknowledgmentRepository { get; }
         IAsnRepository AsnRepository { get; }
+        IVendorRepository VendorRepository { get; }
+        IPartnershipRepository PartnershipRepository { get; }
     }
 }

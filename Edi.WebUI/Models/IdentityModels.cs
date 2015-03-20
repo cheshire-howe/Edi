@@ -32,7 +32,7 @@ namespace Edi.WebUI.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new DropCreateAlwaysInitializer());
+            Database.SetInitializer(new DropCreateIfModelChangesInitializer());
         }
 
         public static ApplicationDbContext Create()
@@ -150,7 +150,7 @@ namespace Edi.WebUI.Models
         /// <summary>
         /// Context Initializer
         /// </summary>
-        public class DropCreateAlwaysInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+        public class DropCreateIfModelChangesInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
         {
             protected override void Seed(ApplicationDbContext context)
             {
