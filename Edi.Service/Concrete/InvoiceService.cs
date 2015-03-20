@@ -46,6 +46,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.InvoiceRepository.GetAll();
         }
 
+        public IEnumerable<Invoice> GetByUserId(string id)
+        {
+            return _unitOfWork.InvoiceRepository.FindBy(x => x.UserID == id);
+        }
+
         public Invoice GetById(int id)
         {
             return _unitOfWork.InvoiceRepository.GetById(id);

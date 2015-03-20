@@ -41,6 +41,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.AcknowledgmentRepository.GetAll();
         }
 
+        public IEnumerable<Acknowledgment> GetByUserId(string id)
+        {
+            return _unitOfWork.AcknowledgmentRepository.FindBy(x => x.UserID == id);
+        } 
+
         public Acknowledgment GetById(int id)
         {
             return _unitOfWork.AcknowledgmentRepository.GetById(id);

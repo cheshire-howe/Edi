@@ -40,6 +40,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.AsnRepository.GetAll();
         }
 
+        public IEnumerable<Asn> GetByUserId(string id)
+        {
+            return _unitOfWork.AsnRepository.FindBy(x => x.UserID == id);
+        }
+
         public Asn GetById(int id)
         {
             return _unitOfWork.AsnRepository.GetById(id);

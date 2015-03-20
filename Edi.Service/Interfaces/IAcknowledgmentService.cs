@@ -12,6 +12,7 @@ namespace Edi.Service.Interfaces
     public interface IAcknowledgmentService : IEntityService<Acknowledgment>
     {
         Acknowledgment GetById(int id);
+        IEnumerable<Acknowledgment> GetByUserId(string id);
         void SaveACKEdiFile(List<Interchange> interchanges, string userId);
     }
 }
