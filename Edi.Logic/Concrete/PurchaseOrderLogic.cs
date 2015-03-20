@@ -347,7 +347,7 @@ namespace Edi.Logic.Concrete
             var purchaseOrder = new PurchaseOrder()
             {
                 PoEnvelope = env,
-                CustomerID = GetCustomerId(names),
+                //CustomerID = GetCustomerId(names),
                 BEG01_TransactionSetPurposeCode = beg != null ? beg.GetElement(1) : null,
                 BEG02_PurchaseOrderTypeCode = beg != null ? beg.GetElement(2) : null,
                 BEG03_PurchaseOrderNumber = beg != null ? beg.GetElement(3) : null,

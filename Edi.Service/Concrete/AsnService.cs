@@ -23,9 +23,9 @@ namespace Edi.Service.Concrete
             _asnLogic = asnLogic;
         }
 
-        public void SaveAsnEdiFile(List<Interchange> interchanges)
+        public void SaveAsnEdiFile(List<Interchange> interchanges, string userId)
         {
-            var asn = _asnLogic.ConvertAsn(interchanges);
+            var asn = _asnLogic.ConvertAsn(interchanges, userId);
             Create(asn);
         }
 

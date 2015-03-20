@@ -23,9 +23,9 @@ namespace Edi.Service.Concrete
             _invoiceLogic = invoiceLogic;
         }
 
-        public void SaveEdiFile(List<Interchange> interchanges)
+        public void SaveEdiFile(List<Interchange> interchanges, string userId)
         {
-            var invoice = _invoiceLogic.ConvertInvoice(interchanges);
+            var invoice = _invoiceLogic.ConvertInvoice(interchanges, userId);
             Create(invoice);
         }
 

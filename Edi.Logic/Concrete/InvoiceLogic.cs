@@ -205,7 +205,7 @@ namespace Edi.Logic.Concrete
             ediDocument.Save(@"..\..\..\Invoice.txt");
         }
 
-        public Invoice ConvertInvoice(List<Interchange> interchanges)
+        public Invoice ConvertInvoice(List<Interchange> interchanges, string userId)
         {
             // Edi section ISA
             var isa = interchanges[0];
@@ -243,7 +243,7 @@ namespace Edi.Logic.Concrete
             var invoice = new Invoice()
             {
                 InvoiceEnvelope = env,
-                CustomerID = GetCustomerId(names),
+                UserID = userId,
                 BIG01_Date = big != null ? big.GetDate8Element(1) : null,
                 BIG02_InvoiceNumber = big != null ? big.GetElement(2) : null,
                 BIG03_Date = big != null ? big.GetDate8Element(1) : null,

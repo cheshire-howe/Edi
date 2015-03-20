@@ -13,7 +13,7 @@ namespace Edi.Logic.Concrete
 {
     public class AcknowledgmentLogic : IAcknowledgmentLogic
     {
-        public Acknowledgment ConvertAcknowledgment(List<Interchange> interchanges)
+        public Acknowledgment ConvertAcknowledgment(List<Interchange> interchanges, string userId)
         {
             // Edi section ISA
             var isa = interchanges[0];
@@ -46,7 +46,7 @@ namespace Edi.Logic.Concrete
             var Acknowledgment = new Acknowledgment()
             {
                 AckEnvelope = env,
-                CustomerID = GetCustomerId(names),
+                UserID = userId,
                 BAK01_TransactionSetPurposeCode = bak != null ? bak.GetElement(1) : null,
                 BAK02_AcknowledgmentType = bak != null ? bak.GetElement(2) : null,
                 BAK03_PurchaseOrderNumber = bak != null ? bak.GetElement(3) : null,

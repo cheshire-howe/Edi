@@ -14,6 +14,12 @@ namespace Edi.Models.AsnModels
         /// </summary>
         public int ID { get; set; }
         /// <summary>
+        /// The UserID is stored in the partnerships table. The edi is read in, and
+        /// the SenderID and ReceiverID must match a record in the database, in which
+        /// the UserID is stored.
+        /// </summary>
+        public string UserID { get; set; }
+        /// <summary>
         /// BSN01 - Code of '00' to indicate original document
         /// </summary>
         [MaxLength(2)]

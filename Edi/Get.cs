@@ -52,6 +52,7 @@ namespace Edi
             builder.RegisterType<AcknowledgmentLogic>().As<IAcknowledgmentLogic>();
             builder.RegisterType<AsnService>().As<IAsnService>();
             builder.RegisterType<AsnLogic>().As<IAsnLogic>();
+            builder.RegisterType<PartnershipService>().As<IPartnershipService>();
             builder.RegisterType<MediationService>().As<IMediationService>();
             builder.RegisterType<MediationLogic>().As<IMediationLogic>();
 

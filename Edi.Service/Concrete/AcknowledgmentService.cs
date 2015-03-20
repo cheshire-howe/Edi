@@ -30,9 +30,9 @@ namespace Edi.Service.Concrete
             _unitOfWork.Commit();
         }
 
-        public void SaveACKEdiFile(List<Interchange> interchanges)
+        public void SaveACKEdiFile(List<Interchange> interchanges, string userId)
         {
-            var acknowledgment = _acknowledgmentLogic.ConvertAcknowledgment(interchanges);
+            var acknowledgment = _acknowledgmentLogic.ConvertAcknowledgment(interchanges, userId);
             Create(acknowledgment);
         }
 

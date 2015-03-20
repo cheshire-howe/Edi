@@ -7,6 +7,6 @@ namespace Edi.Logic.Interfaces
 {
     public interface IAsnLogic
     {
-        Asn ConvertAsn(List<Interchange> interchanges);
+        Asn ConvertAsn(List<Interchange> interchanges, string userId);
     }
 }

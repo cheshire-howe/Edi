@@ -11,17 +11,20 @@ namespace Edi.Service.Concrete
         private readonly IAsnService _asnService;
         private readonly IInvoiceService _invoiceService;
         private readonly IPurchaseOrderService _purchaseOrderService;
+        private readonly IPartnershipService _partnershipService;
         private readonly IMediationLogic _mediationLogic;
 
         public MediationService(IAcknowledgmentService acknowledgmentService,
                                 IAsnService asnService, IInvoiceService invoiceService,
                                 IPurchaseOrderService purchaseOrderService,
+                                IPartnershipService partnershipService,
                                 IMediationLogic mediationLogic)
         {
             _acknowledgmentService = acknowledgmentService;
             _asnService = asnService;
             _invoiceService = invoiceService;
             _purchaseOrderService = purchaseOrderService;
+            _partnershipService = partnershipService;
             _mediationLogic = mediationLogic;
         }
 
@@ -44,13 +47,16 @@ namespace Edi.Service.Concrete
                 {
                     var interchanges = _mediationLogic.GetInterchanges(file.FullName);
 
+                    var userId = _partnershipService.GetUserId(interchanges[0].InterchangeReceiverId,
+                        interchanges[0].InterchangeSenderId);
+
                     var ediFileType = _mediationLogic.FindService(interchanges);
 
                     switch (ediFileType)
                     {
                         case 810:
                             // 810 - Invoice
-                            _invoiceService.SaveEdiFile(interchanges);
+                            _invoiceService.SaveEdiFile(interchanges, userId);
                             break;
                         case 850:
                             // 850 - PurchaseOrder
@@ -58,11 +64,11 @@ namespace Edi.Service.Concrete
                             break;
                         case 855:
                             // 855 - Acknowledgment
-                            _acknowledgmentService.SaveACKEdiFile(interchanges);
+                            _acknowledgmentService.SaveACKEdiFile(interchanges, userId);
                             break;
                         case 856:
                             // 856 - Advanced Shipping Notice
-                            _asnService.SaveAsnEdiFile(interchanges);
+                            _asnService.SaveAsnEdiFile(interchanges, userId);
                             break;
                     }
                     // Made it this far, move to success directory

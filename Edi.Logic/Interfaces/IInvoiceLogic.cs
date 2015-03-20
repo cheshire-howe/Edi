@@ -8,6 +8,6 @@ namespace Edi.Logic.Interfaces
     public interface IInvoiceLogic
     {
         void WriteInvoiceEdi(Invoice invoice);
-        Invoice ConvertInvoice(List<Interchange> interchanges);
+        Invoice ConvertInvoice(List<Interchange> interchanges, string userId);
     }
 }

@@ -14,9 +14,11 @@ namespace Edi.Models.AcknowledgmentModels
         /// </summary>
         public int ID { get; set; }
         /// <summary>
-        /// N104 where N101 is "BY" or "BT"
+        /// The UserID is stored in the partnerships table. The edi is read in, and
+        /// the SenderID and ReceiverID must match a record in the database, in which
+        /// the UserID is stored.
         /// </summary>
-        public string CustomerID { get; set; }
+        public string UserID { get; set; }
         /// <summary>
         /// BAK01 - Code identifying purpose of transaction set
         /// 00 -> Original

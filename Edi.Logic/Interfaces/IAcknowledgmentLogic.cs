@@ -7,6 +7,6 @@ namespace Edi.Logic.Interfaces
 {
     public interface IAcknowledgmentLogic
     {
-        Acknowledgment ConvertAcknowledgment(List<Interchange> interchanges);
+        Acknowledgment ConvertAcknowledgment(List<Interchange> interchanges, string userId);
     }
 }

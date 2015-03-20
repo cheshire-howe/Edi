@@ -34,6 +34,13 @@ namespace Edi.Service.Concrete
             return _unitOfWork.PartnershipRepository.GetById(id);
         }
 
+        public string GetUserId(string customerId, string vendorId)
+        {
+            customerId = customerId.Trim();
+            vendorId = vendorId.Trim();
+            return _unitOfWork.PartnershipRepository.GetUserId(customerId, vendorId);
+        }
+
         public void Update(Partnership entity)
         {
             _unitOfWork.PartnershipRepository.Edit(entity);

@@ -13,7 +13,7 @@ namespace Edi.Logic.Concrete
 {
     public class AsnLogic : IAsnLogic
     {
-        public Asn ConvertAsn(List<Interchange> interchanges)
+        public Asn ConvertAsn(List<Interchange> interchanges, string userId)
         {
             var isa = interchanges[0];
             var gs = isa.FunctionGroups.ToList()[0];
@@ -33,6 +33,7 @@ namespace Edi.Logic.Concrete
             var asn = new Asn()
             {
                 AsnEnvelope = env,
+                UserID = userId,
                 BSN01_TransactionSetPurposeCode = bsn != null ? bsn.GetElement(1) : null,
                 BSN02_ShipmentIdentifier = bsn != null ? bsn.GetElement(2) : null,
                 BSN03_Date = bsn != null ? bsn.GetDate8Element(3) : null,

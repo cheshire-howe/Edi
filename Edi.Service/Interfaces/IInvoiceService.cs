@@ -12,7 +12,7 @@ namespace Edi.Service.Interfaces
     public interface IInvoiceService : IEntityService<Invoice>
     {
         Invoice GetById(int id);
-        void SaveEdiFile(List<Interchange> interchanges);
+        void SaveEdiFile(List<Interchange> interchanges, string userId);
         void WriteEdiFile(int id);
     }
 }
