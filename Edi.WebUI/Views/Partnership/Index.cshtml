@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Edi.WebUI.Models.PartnershipViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Partnerships";
 }
 
-<h2>Index</h2>
+<h2>Partnerships</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -17,18 +17,6 @@
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerIDQualifier)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerEdiID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorIDQualifier)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorEdiID)
-        </th>
         <th></th>
     </tr>
 
@@ -39,18 +27,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerIDQualifier)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerEdiID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VendorIDQualifier)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VendorEdiID)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
