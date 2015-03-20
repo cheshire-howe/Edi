@@ -340,7 +340,6 @@ namespace Edi.Logic.Concrete
 
             var env = ExtractEnv(isa, gs, st);
             var names = ExtractNames(n1);
-            //var ctts = ExtractCtts(ctt);
             var items = ExtractItems(po1);
             var refs = ExtractRefs(refpo);
             var dtms = ExtractPoIDtms(dtm);
