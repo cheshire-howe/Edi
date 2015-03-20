@@ -30,7 +30,20 @@ namespace Edi.WebUI.Controllers
         public ActionResult Index()
         {
             var partnerships = _partnershipService.GetAll();
-            return View(partnerships.ToList());
+            var partnershipViewModels = (from partnership in partnerships
+                let user = _userContext.Users.FirstOrDefault(x => x.Id == partnership.UserID)
+                select new PartnershipViewModel()
+                {
+                    ID = partnership.ID,
+                    UserName = user != null ? user.UserName : "",
+                    VendorName = partnership.Vendor.Name,
+                    CustomerIDQualifier = partnership.CustomerIDQualifier,
+                    CustomerEdiID = partnership.CustomerEdiID,
+                    VendorIDQualifier = partnership.VendorIDQualifier,
+                    VendorEdiID = partnership.VendorEdiID
+                }).ToList();
+
+            return View(partnershipViewModels);
         }
 
         // GET: Partnership/Details/5
@@ -45,7 +58,18 @@ namespace Edi.WebUI.Controllers
             {
                 return HttpNotFound();
             }
-            return View(partnership);
+            var user = _userContext.Users.FirstOrDefault(x => x.Id == partnership.UserID);
+            var partnershipViewModel = new PartnershipViewModel()
+            {
+                ID = partnership.ID,
+                UserName = user != null ? user.UserName : "",
+                VendorName = partnership.Vendor.Name,
+                CustomerIDQualifier = partnership.CustomerIDQualifier,
+                CustomerEdiID = partnership.CustomerEdiID,
+                VendorIDQualifier = partnership.VendorIDQualifier,
+                VendorEdiID = partnership.VendorEdiID
+            };
+            return View(partnershipViewModel);
         }
 
         // GET: Partnership/Create

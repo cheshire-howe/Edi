@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Edi.Models.TradingPartners.Partnership>
+﻿@model IEnumerable<Edi.WebUI.Models.PartnershipViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Vendor.Name)
+            @Html.DisplayNameFor(model => model.VendorName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserID)
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CustomerIDQualifier)
@@ -35,10 +35,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Vendor.Name)
+            @Html.DisplayFor(modelItem => item.VendorName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserID)
+            @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CustomerIDQualifier)

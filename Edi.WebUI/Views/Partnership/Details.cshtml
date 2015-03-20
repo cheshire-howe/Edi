@@ -1,4 +1,4 @@
-﻿@model Edi.Models.TradingPartners.Partnership
+﻿@model Edi.WebUI.Models.PartnershipViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,19 +11,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Vendor.Name)
+            @Html.DisplayNameFor(model => model.VendorName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Vendor.Name)
+            @Html.DisplayFor(model => model.VendorName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UserID)
+            @Html.DisplayNameFor(model => model.UserName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserID)
+            @Html.DisplayFor(model => model.UserName)
         </dd>
 
         <dt>

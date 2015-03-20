@@ -207,6 +207,7 @@
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PartnershipViewModel.cs" />
     <Compile Include="Models\RoleViewModels.cs" />
     <Compile Include="Modules\LogicModule.cs" />
     <Compile Include="Modules\ServiceModule.cs" />
