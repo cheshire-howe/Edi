@@ -10,9 +10,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Edi.Models.PurchaseOrderModels;
 using Edi.Service.Interfaces;
+using Microsoft.AspNet.Identity;
 
 namespace Edi.WebUI.Controllers
 {
+    [Authorize(Roles = "User")]
     public class PurchaseOrderApiController : ApiController
     {
         private readonly IPurchaseOrderService _purchaseOrderService;
@@ -25,7 +27,8 @@ namespace Edi.WebUI.Controllers
         // GET: api/PurchaseOrderApi
         public IEnumerable<PurchaseOrder> GetPurchaseOrders()
         {
-            return _purchaseOrderService.GetAll().ToList();
+            string id = User.Identity.GetUserId();
+            return _purchaseOrderService.GetByUserId(id).ToList();
         }
 
         // GET: api/PurchaseOrderApi/5

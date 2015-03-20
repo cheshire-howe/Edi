@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Edi.Models.PurchaseOrderModels;
 
 namespace Edi.Dal.Interfaces

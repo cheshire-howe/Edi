@@ -11,6 +11,7 @@ using Edi.Service.Interfaces;
 
 namespace Edi.WebUI.Controllers
 {
+    [Authorize(Roles = "User")]
     public class PurchaseOrderController : Controller
     {
         /////////////////////////////////////////////////////////

@@ -10,7 +10,10 @@ using Edi.Dal.Interfaces;
 using Edi.Logic;
 using Edi.Logic.Concrete;
 using Edi.WebUI.Modules;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(Edi.WebUI.Startup))]
@@ -33,6 +36,12 @@ namespace Edi.WebUI
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                AuthenticationMode = AuthenticationMode.Active
+            });
 
             // Autofac Config
             var builder = new ContainerBuilder();

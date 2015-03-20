@@ -53,6 +53,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.PurchaseOrderRepository.GetAll();
         }
 
+        public IEnumerable<PurchaseOrder> GetByUserId(string id)
+        {
+            return _unitOfWork.PurchaseOrderRepository.FindBy(x => x.UserID == id);
+        } 
+
         public PurchaseOrder GetById(int id)
         {
             return _unitOfWork.PurchaseOrderRepository.GetById(id);
