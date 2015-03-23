@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 using Edi.Models.PurchaseOrderModels;
 using Edi.Service.Interfaces;
 
@@ -32,6 +33,16 @@ namespace Edi.WebUI.Controllers
         public ActionResult PoDetails()
         {
             return PartialView("PoPartials/Details");
+        }
+
+        public ActionResult PoCreate()
+        {
+            return PartialView("PoPartials/Create");
+        }
+
+        public ActionResult PoLineItem()
+        {
+            return PartialView("PoPartials/FormPartials/LineItem");
         }
     }
 }

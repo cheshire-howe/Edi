@@ -18,10 +18,12 @@ namespace Edi.WebUI.Controllers
     public class PurchaseOrderApiController : ApiController
     {
         private readonly IPurchaseOrderService _purchaseOrderService;
+        private readonly IPartnershipService _partnershipService;
 
-        public PurchaseOrderApiController(IPurchaseOrderService purchaseOrderService)
+        public PurchaseOrderApiController(IPurchaseOrderService purchaseOrderService, IPartnershipService partnershipService)
         {
             _purchaseOrderService = purchaseOrderService;
+            _partnershipService = partnershipService;
         }
 
         // GET: api/PurchaseOrderApi
@@ -35,6 +37,7 @@ namespace Edi.WebUI.Controllers
         [ResponseType(typeof(PurchaseOrder))]
         public IHttpActionResult GetPurchaseOrder(int id)
         {
+            // TODO: Check if current user id == po user id
             PurchaseOrder purchaseOrder = _purchaseOrderService.GetById(id);
             if (purchaseOrder == null)
             {
@@ -84,6 +87,19 @@ namespace Edi.WebUI.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            // TODO: Partnership Api to load dropdown with envelope info
+            purchaseOrder.PoEnvelope.ISA05_InterchangeSenderIdQualifier = "01";
+            purchaseOrder.PoEnvelope.ISA06_InterchangeSenderId = "828513080      ";
+            purchaseOrder.PoEnvelope.ISA07_InterchangeReceiverIdQualifier = "01";
+            purchaseOrder.PoEnvelope.ISA08_InterchangeReceiverId = "001903202U     ";
+            
+            purchaseOrder.UserID = User.Identity.GetUserId();
+
+            for (int i = 0; i < purchaseOrder.Items.Count; i++)
+            {
+                purchaseOrder.Items[i].PO101_AssignedIdentification = (i + 1).ToString();
             }
 
             _purchaseOrderService.Create(purchaseOrder);

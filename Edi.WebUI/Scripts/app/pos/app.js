@@ -9,7 +9,7 @@
         collections: 'Scripts/app/pos/collections',
         views: 'Scripts/app/pos/views',
         routers: 'Scripts/app/pos/routers',
-        components: 'Scripts/app/pos/components' /*,
+        components: 'Scripts/app/pos/components'/*,
         modalDialog: 'lib/backbone.ModalDialog/backbone.ModalDialog'*/
     },
     shim: {

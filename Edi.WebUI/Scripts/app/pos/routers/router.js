@@ -7,7 +7,8 @@
     var router = Backbone.Router.extend({
         routes: {
             '': 'pos',
-            'details/:id': 'details'
+            'details/:id': 'details',
+            'create': 'create'
         },
 
         initialize: function() {

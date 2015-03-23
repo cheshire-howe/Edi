@@ -23,6 +23,14 @@ function($, _, Backbone) {
             });
         },
 
+        create: function() {
+            var self = this;
+            require(['views/createView'], function(CreateView) {
+                var view = new CreateView();
+                self.renderView.call(self, view);
+            });
+        },
+
         renderView: function(view) {
             this.currentView && this.currentView.remove();
             $('#main').html(view.render().el);

@@ -1,0 +1,70 @@
+﻿<div id="line-item-<%= count %>">
+    <fieldset>
+        <legend>Line Item</legend>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="PO107_ProductID">Product ID</label>
+                    <input type="text" class="form-control" id="PO107_ProductID" placeholder="">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="PO106_ProductIdQualifier">Product ID Qualifier</label>
+                    <select id="PO106_ProductIdQualifier" class="form-control">
+                        <option value="BP">Buyer's Part Number (default)</option>
+                        <option value="MF">Manufacturer</option>
+                        <option value="MG">Manufacturer's Catalog Number</option>
+                        <option value="VC">Vendor's Catalog Number</option>
+                        <option value="IN">Buyer's Item Number</option>
+                        <option value="SN">Serial Number</option>
+                        <option value="LT">Lot Number</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="PO102_QuantityOrdered">Quantity</label>
+                    <input type="number" class="form-control" id="PO102_QuantityOrdered">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="PO104_UnitPrice">Unit Price</label>
+                    <input type="text" class="form-control" id="PO104_UnitPrice">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="PO103_UnitOfMeasurement">Unit Of Measurement</label>
+                    <select id="PO103_UnitOfMeasurement" class="form-control">
+                        <option value="EA">Each</option>
+                        <option value="CA">Case</option>
+                        <option value="PK">Package</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="PO105_BasisOfUnitPriceCode">Basis of Unit Price Code</label>
+                    <select id="PO105_BasisOfUnitPriceCode" class="form-control">
+                        <option value="PE">Price Per Each</option>
+                        <option value="CA">Catalog</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @*<label class="control-label" for="PO101_AssignedIdentification">AssignedIdentification</label>*@
+            <input type="hidden" class="form-control" id="PO101_AssignedIdentification" value="">
+        </div>
+    </fieldset>
+    <input id="btnAddLineItem" type="button" value="Add Line Item" class="btn btn-default" />
+    <% if(count !== 1) { %>
+    <input id="btnRemoveLineItem" type="button" value="Remove Line Item" class="btn btn-default" data-count="<%= count %>" />
+    <% } %>
+
+    <hr />
+</div>

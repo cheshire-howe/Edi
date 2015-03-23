@@ -14,6 +14,7 @@ function($, _, Backbone, PoView, Router) {
 
         render: function() {
             this.$el.html("<h2>Purchase Orders</h2>");
+            this.$el.append("<p><a href='#/create'>Create Purchase Order</a></p>")
             this.collection.each(function(item) {
                 this.addOne(item);
             }, this);

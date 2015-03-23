@@ -26,7 +26,11 @@
             "Refs": []
         },
 
-        idAttribute: 'ID'
+        idAttribute: 'ID',
+
+        validate: function(attrs, options) {
+            
+        }
     });
 
     return Po;

@@ -224,12 +224,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\pos\app.js" />
     <Content Include="Scripts\app\pos\collections\pos.js" />
     <Content Include="Scripts\app\pos\components\appController.js" />
     <Content Include="Scripts\app\pos\components\dataService.js" />
     <Content Include="Scripts\app\pos\models\po.js" />
     <Content Include="Scripts\app\pos\routers\router.js" />
+    <Content Include="Scripts\app\pos\views\createView.js" />
     <Content Include="Scripts\app\pos\views\detailsView.js" />
     <Content Include="Scripts\app\pos\views\posView.js" />
     <Content Include="Scripts\app\pos\views\poView.js" />
@@ -315,6 +316,8 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\PurchaseOrder\PoPartials\Create.cshtml" />
+    <Content Include="Views\PurchaseOrder\PoPartials\FormPartials\LineItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

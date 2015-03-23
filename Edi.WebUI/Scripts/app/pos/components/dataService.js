@@ -17,6 +17,11 @@
                 deferred.resolve();
             });
             return deferred.promise();
+        },
+
+        createPo: function(po) {
+            po.url = 'api/PurchaseOrderApi';
+            return Backbone.sync('create', po);
         }
     };
 
