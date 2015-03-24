@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="control-label" for="PO107_ProductID">Product ID</label>
-                    <input type="text" class="form-control" id="PO107_ProductID" placeholder="">
+                    <label class="control-label" for="PO107_ProductID-<%= count %>">Product ID</label>
+                    <input type="text" class="form-control" id="PO107_ProductID-<%= count %>" placeholder="">
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="control-label" for="PO106_ProductIdQualifier">Product ID Qualifier</label>
-                    <select id="PO106_ProductIdQualifier" class="form-control">
+                    <label class="control-label" for="PO106_ProductIdQualifier-<%= count %>">Product ID Qualifier</label>
+                    <select id="PO106_ProductIdQualifier-<%= count %>" class="form-control">
                         <option value="BP">Buyer's Part Number (default)</option>
                         <option value="MF">Manufacturer</option>
                         <option value="MG">Manufacturer's Catalog Number</option>
@@ -24,22 +24,22 @@
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="control-label" for="PO102_QuantityOrdered">Quantity</label>
-                    <input type="number" class="form-control" id="PO102_QuantityOrdered">
+                    <label class="control-label" for="PO102_QuantityOrdered-<%= count %>">Quantity</label>
+                    <input type="number" class="form-control" id="PO102_QuantityOrdered-<%= count %>">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="control-label" for="PO104_UnitPrice">Unit Price</label>
-                    <input type="text" class="form-control" id="PO104_UnitPrice">
+                    <label class="control-label" for="PO104_UnitPrice-<%= count %>">Unit Price</label>
+                    <input type="text" class="form-control" id="PO104_UnitPrice-<%= count %>">
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="control-label" for="PO103_UnitOfMeasurement">Unit Of Measurement</label>
-                    <select id="PO103_UnitOfMeasurement" class="form-control">
+                    <label class="control-label" for="PO103_UnitOfMeasurement-<%= count %>">Unit Of Measurement</label>
+                    <select id="PO103_UnitOfMeasurement-<%= count %>" class="form-control">
                         <option value="EA">Each</option>
                         <option value="CA">Case</option>
                         <option value="PK">Package</option>
@@ -48,21 +48,21 @@
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="control-label" for="PO105_BasisOfUnitPriceCode">Basis of Unit Price Code</label>
-                    <select id="PO105_BasisOfUnitPriceCode" class="form-control">
+                    <label class="control-label" for="PO105_BasisOfUnitPriceCode-<%= count %>">Basis of Unit Price Code</label>
+                    <select id="PO105_BasisOfUnitPriceCode-<%= count %>" class="form-control">
                         <option value="PE">Price Per Each</option>
                         <option value="CA">Catalog</option>
                     </select>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            @*<label class="control-label" for="PO101_AssignedIdentification">AssignedIdentification</label>*@
+        @*<div class="form-group">
+            <label class="control-label" for="PO101_AssignedIdentification">AssignedIdentification</label>
             <input type="hidden" class="form-control" id="PO101_AssignedIdentification" value="">
-        </div>
+        </div>*@
     </fieldset>
     <input id="btnAddLineItem" type="button" value="Add Line Item" class="btn btn-default" />
-    <% if(count !== 1) { %>
+    <% if(count !== 0) { %>
     <input id="btnRemoveLineItem" type="button" value="Remove Line Item" class="btn btn-default" data-count="<%= count %>" />
     <% } %>
 

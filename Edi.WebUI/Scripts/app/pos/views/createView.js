@@ -16,7 +16,8 @@
             'click #btnSave': 'createPo',
             'click #btnBack': 'back',
             'click #btnAddLineItem': 'addLineItem',
-            'click #btnRemoveLineItem': 'removeLineItem'
+            'click #btnRemoveLineItem': 'removeLineItem',
+            'click .close': 'closeError'
         },
 
         $cache: {
@@ -38,21 +39,22 @@
         },
 
         addLineItem: function() {
-            this.$cache.lineItemCount++;
-
             var data = {
                 count: this.$cache.lineItemCount
             };
 
             var lineItemTmpl = _.template(this.$cache.lineItemForm);
-            this.$el.find('#line-items').append(lineItemTmpl(data));
+            $(lineItemTmpl(data)).appendTo(this.$el.find('#line-items')).hide().slideDown();
+
+            this.$cache.lineItemCount++;
         },
 
         removeLineItem: function(e) {
             if (confirm("Are you sure you want to remove this line item?")) {
                 var lineItemNumber = $(e.currentTarget).data('count');
-                console.log(lineItemNumber);
-                $('#line-item-' + lineItemNumber).remove();
+                $('#line-item-' + lineItemNumber).slideUp('slow', function() {
+                    this.remove();
+                });
             }
         },
 
@@ -62,13 +64,19 @@
 
             if (this.model.set(this.getCurrentFormValues(), { validate: true })) {
                 dataService.createPo(self.model).then(function(newPo) {
+                    self.$cache.lineItemCount = 0;
                     app.pos.add(newPo);
                     app.pos.get(newPo.ID);
                     Router.navigate('', { trigger: true });
                 });
             } else {
-                $('#validationError').text(this.model.validationError);
+                $('#errorMsg').text(this.model.validationError);
+                $('#validationError').slideDown();
             }
+        },
+
+        closeError: function(e) {
+            $('#validationError').slideUp();
         },
 
         back: function() {
@@ -76,8 +84,25 @@
         },
 
         getCurrentFormValues: function() {
-            return {
 
+            // TODO: for loop if count exists for line item
+            var lineItems = [];
+            for (var i = 0; i < this.$cache.lineItemCount; i++) {
+                if ($('#line-item-' + i).is('html *')) {
+                    var item = {
+                        PO102_QuantityOrdered: $('#PO102_QuantityOrdered-' + i).val(),
+                        PO103_UnitOfMeasurement: $('#PO103_UnitOfMeasurement-' + i).val(),
+                        PO104_UnitPrice: $('#PO104_UnitPrice-' + i).val(),
+                        PO105_BasisOfUnitPriceCode: $('#PO105_BasisOfUnitPriceCode-' + i).val(),
+                        PO106_ProductIdQualifier: $('#PO106_ProductIdQualifier-' + i).val(),
+                        PO107_ProductID: $('#PO107_ProductID-' + i).val()
+                    };
+                    lineItems.push(item);
+                }
+            }
+            console.log(lineItems);
+            return {
+                Items: lineItems
             };
         }
     });

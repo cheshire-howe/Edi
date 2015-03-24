@@ -29,7 +29,13 @@
         idAttribute: 'ID',
 
         validate: function(attrs, options) {
-            
+            for (var i = 0; i < attrs.Items.length; i++) {
+                if (attrs.Items[i].PO107_ProductID === "" ||
+                    attrs.Items[i].PO104_UnitPrice === "" ||
+                    attrs.Items[i].PO102_QuantityOrdered === "") {
+                    return "You are missing values";
+                }
+            }
         }
     });
 
