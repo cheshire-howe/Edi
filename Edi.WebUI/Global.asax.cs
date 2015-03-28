@@ -12,7 +12,7 @@ namespace Edi.WebUI
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        private string _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         protected void Application_Start()
         {
@@ -21,13 +21,13 @@ namespace Edi.WebUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //Start SqlDependency with application initialization
+            // Start SqlDependency with application initialization
             SqlDependency.Start(_connectionString);
         }
 
         protected void Application_End()
         {
-            //Stop SQL dependency
+            // Stop SQL dependency
             SqlDependency.Stop(_connectionString);
         }
     }

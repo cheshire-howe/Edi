@@ -19,7 +19,6 @@ function($, _, Backbone, PoView, Router) {
             app.socket.client.updatePos = function(data) {
                 self.collection.fetch({
                     success: function() {
-                        console.log("Success");
                         self.render();
                     }
                 });
