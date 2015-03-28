@@ -1,0 +1,41 @@
+﻿<div id="dtm-<%= count %>">
+    <fieldset>
+        <legend>Date and Time</legend>
+        <div class="row">
+            <% if(count === 0) { %>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="DTM01_DateTimeQualifier-<%= count %>">Date/Time Qualifier</label>
+                    <select id="DTM01_DateTimeQualifier-<%= count %>" class="form-control">
+                        <option value="010">Requested Shipping Date</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="DTM02_PurchaseOrderDate-<%= count %>">Date/Time</label>
+                    <input type="date" class="form-control" id="DTM02_PurchaseOrderDate-<%= count %>">
+                </div>
+            </div>
+            <% } else { %>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="DTM01_DateTimeQualifier-<%= count %>">Date/Time Qualifier</label>
+                    <input type="text" class="form-control" id="DTM01_DateTimeQualifier-<%= count %>" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="DTM02_PurchaseOrderDate-<%= count %>">Date/Time</label>
+                    <input type="date" class="form-control" id="DTM02_PurchaseOrderDate-<%= count %>">
+                </div>
+            </div>
+            <% } %>
+        </div>
+
+        <input id="btnAddDtm" type="button" value="Add Date/Time" class="btn btn-default" />
+        <% if(count !== 0) { %>
+        <input id="btnRemoveDtm" type="button" value="Remove Date/Time" class="btn btn-default" data-count="<%= count %>" />
+        <% } %>
+    </fieldset>
+</div>

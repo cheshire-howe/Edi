@@ -44,5 +44,16 @@ namespace Edi.WebUI.Controllers
         {
             return PartialView("PoPartials/FormPartials/LineItem");
         }
+
+        public ActionResult PoDtm()
+        {
+            ViewBag.MyVar = "Cool stuff";
+            return PartialView("PoPartials/FormPartials/Dtm");
+        }
+
+        public ActionResult PoItemDtm()
+        {
+            return PartialView("PoPartials/FormPartials/ItemDtm");
+        }
     }
 }

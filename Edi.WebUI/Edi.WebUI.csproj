@@ -318,6 +318,8 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\PurchaseOrder\PoPartials\Create.cshtml" />
     <Content Include="Views\PurchaseOrder\PoPartials\FormPartials\LineItem.cshtml" />
+    <Content Include="Views\PurchaseOrder\PoPartials\FormPartials\Dtm.cshtml" />
+    <Content Include="Views\PurchaseOrder\PoPartials\FormPartials\ItemDtm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
