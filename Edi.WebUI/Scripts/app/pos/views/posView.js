@@ -3,18 +3,37 @@
     'underscore',
     'backbone',
     'views/poView',
-    'routers/router'],
+    'routers/router',
+    'signalr',
+    'hubs'],
 function($, _, Backbone, PoView, Router) {
     var posView = Backbone.View.extend({
         tagName: 'div',
 
         initialize: function() {
+            var self = this;
             this.collection = app.pos;
+
+            app.socket = $.connection.poHub;
+
+            app.socket.client.updatePos = function(data) {
+                self.collection.fetch({
+                    success: function() {
+                        console.log("Success");
+                        self.render();
+                    }
+                });
+            };
+
+            $.connection.hub.start().done(function() {
+                app.socket.server.start();
+            });
         },
 
         render: function() {
             this.$el.html("<h2>Purchase Orders</h2>");
-            this.$el.append("<p><a href='#/create'>Create Purchase Order</a></p>")
+            this.$el.append("<p><a href='#/create'>Create Purchase Order</a></p>");
+            this.$el.append("<button id='clickme'>Click Me</button>");
             this.collection.each(function(item) {
                 this.addOne(item);
             }, this);

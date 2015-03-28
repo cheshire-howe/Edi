@@ -42,6 +42,9 @@ namespace Edi.WebUI
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 AuthenticationMode = AuthenticationMode.Active
             });
+            
+            // SignalR Config
+            app.MapSignalR();
 
             // Autofac Config
             var builder = new ContainerBuilder();

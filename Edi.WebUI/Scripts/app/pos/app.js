@@ -5,6 +5,8 @@
         jquery: 'Scripts/jquery-1.10.2.min',
         backbone: 'Scripts/backbone',
         text: 'Scripts/text',
+        signalr: 'Scripts/jquery.signalR-2.2.0',
+        hubs: '/signalr/hubs?noext',
         models: 'Scripts/app/pos/models',
         collections: 'Scripts/app/pos/collections',
         views: 'Scripts/app/pos/views',
