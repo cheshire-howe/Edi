@@ -44,7 +44,7 @@ namespace Edi.Service.Concrete
 
         public void Create(PurchaseOrder entity)
         {
-            entity.UserID = "1b9e4fa9-2988-4c0f-92e0-7ab16a029141";
+            entity.UserID = "a632d43c-1749-4092-86ea-dd9a83a9f29d";
             _unitOfWork.PurchaseOrderRepository.Add(entity);
             _unitOfWork.Commit();
         }

@@ -13,20 +13,12 @@ function($, _, Backbone, PoView, Router) {
         initialize: function() {
             var self = this;
             this.collection = app.pos;
+            this.collection.fetch();
+            this.listenTo(this.collection, 'add', this.onModelAdded);
+        },
 
-            app.socket = $.connection.poHub;
-
-            app.socket.client.updatePos = function(data) {
-                self.collection.fetch({
-                    success: function() {
-                        self.render();
-                    }
-                });
-            };
-
-            $.connection.hub.start().done(function() {
-                app.socket.server.start();
-            });
+        onModelAdded: function() {
+            this.render();
         },
 
         render: function() {

@@ -21,6 +21,14 @@
         }
     },
     shim: {
+        'signalr': {
+            deps: ['jquery'],
+            exports: 'signalr'
+        },
+        'hubs': {
+            deps: ['jquery', 'signalr'],
+            exports: 'hubs'
+        },
         'backbone': {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
@@ -36,11 +44,20 @@
 
 var app = app || {};
 
-require(['routers/router', 'components/dataService', 'moment'],
-function(router, dataService, moment) {
+require(['jquery', 'routers/router', 'components/dataService', 'moment', 'hubs'],
+function($, router, dataService, moment) {
 
     app.moment = moment;
-    $(function() {
+
+    app.socket = $.connection.poHub;
+
+    app.socket.client.updatePos = function() {
+        app.pos.fetch();
+    };
+
+    $.connection.hub.start({ waitForPageLoad: false }).done(function() {
+        app.socket.server.start();
+
         dataService.getData().then(function() {
             router.start();
         });
