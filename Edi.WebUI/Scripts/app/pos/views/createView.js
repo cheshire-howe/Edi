@@ -35,6 +35,8 @@
             this.model = new Po();
             this.$cache.lineItemForm = LineItemTmpl;
             this.$cache.dtmForm = DtmTmpl;
+            this.$cache.lineItemCount = 0;
+            this.$cache.dtmCount = 0;
         },
 
         render: function() {
@@ -93,17 +95,13 @@
 
             if (this.model.set(this.getCurrentFormValues(), { validate: true })) {
                 dataService.createPo(self.model).then(function(newPo) {
-                    $('#btnSave').removeClass('btn-default');
-                    $('#btnSave').addClass('btn-success');
-                    self.$cache.lineItemCount = 0;
-                    self.$cache.dtmCount = 0;
                     app.pos.add(newPo);
                     app.pos.get(newPo.ID);
                     Router.navigate('', { trigger: true });
                 });
             } else {
                 $('#errorMsg').text(this.model.validationError);
-                $('#validationError').slideDown();
+                $('#validationError').fadeIn('slow');
                 $('#btnSave').removeClass('btn-default');
                 $('#btnSave').addClass('btn-danger');
             }

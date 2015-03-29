@@ -3,9 +3,8 @@
     'underscore',
     'backbone',
     'views/poView',
-    'routers/router',
-    'signalr',
-    'hubs'],
+    'routers/router'
+],
 function($, _, Backbone, PoView, Router) {
     var posView = Backbone.View.extend({
         tagName: 'div',
@@ -14,10 +13,10 @@ function($, _, Backbone, PoView, Router) {
             var self = this;
             this.collection = app.pos;
             this.collection.fetch();
-            this.listenTo(this.collection, 'add', this.onModelAdded);
+            this.collection.bind('add remove', this.onModelAddedOrRemoved, this);
         },
 
-        onModelAdded: function() {
+        onModelAddedOrRemoved: function() {
             this.render();
         },
 
