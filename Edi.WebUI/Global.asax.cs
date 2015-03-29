@@ -20,9 +20,6 @@ namespace Edi.WebUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            // Start SqlDependency with application initialization
-            SqlDependency.Start(_connectionString);
         }
 
         protected void Application_End()

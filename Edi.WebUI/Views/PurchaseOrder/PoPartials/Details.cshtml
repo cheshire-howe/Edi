@@ -21,12 +21,12 @@
             </tr>
             <tr>
                 <td class="col-sm-2"><strong>P.O. Date</strong></td>
-                <td><%= new Date(BEG05_Date).toLocaleDateString("en-US") %></td>
+                <td><%= app.moment(BEG05_Date).format('l') %></td>
             </tr>
             <tr>
                 <td class="col-sm-2"><strong>Delivery Date</strong></td>
                 <% if (Dtms.length > 0) { %>
-                <td><%= new Date(Dtms[0].DTM02_PurchaseOrderDate).toLocaleDateString("en-US") %></td>
+                <td><%= app.moment(Dtms[0].DTM02_PurchaseOrderDate).format('l') %></td>
                 <% } else { %>
                 <td></td>
                 <% } %>
@@ -64,8 +64,8 @@
             <% } %>
         </div>
     </div>
-    <hr />
     <div class="row">
+        <hr />
         <div class="col-xs-12">
             <h4>Line Items</h4>
             <div class="items">

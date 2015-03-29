@@ -14,6 +14,12 @@ namespace Edi.WebUI.DbNotifier
     {
         readonly string _connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
+        public PoChangeNotifier()
+        {
+            // Start SqlDependency with application initialization
+            SqlDependency.Start(_connString);
+        }
+
         public void GetAllPos()
         {
             using (var connection = new SqlConnection(_connString))

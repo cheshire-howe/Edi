@@ -3,7 +3,7 @@
         <legend>Date and Time</legend>
         <div class="row">
             <% if(count === 0) { %>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <div class="form-group">
                     <label class="control-label" for="DTM01_DateTimeQualifier-<%= count %>">Date/Time Qualifier</label>
                     <select id="DTM01_DateTimeQualifier-<%= count %>" class="form-control">
@@ -11,20 +11,24 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <div class="form-group">
                     <label class="control-label" for="DTM02_PurchaseOrderDate-<%= count %>">Date/Time</label>
                     <input type="date" class="form-control" id="DTM02_PurchaseOrderDate-<%= count %>">
                 </div>
             </div>
             <% } else { %>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <div class="form-group">
                     <label class="control-label" for="DTM01_DateTimeQualifier-<%= count %>">Date/Time Qualifier</label>
-                    <input type="text" class="form-control" id="DTM01_DateTimeQualifier-<%= count %>" />
+                    <select id="DTM01_DateTimeQualifier-<%= count %>" class="form-control">
+                        <option value="001">Cancel After</option>
+                        <option value="037">Ship Not Before</option>
+                        <option value="064">Do Not Deliver Before</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <div class="form-group">
                     <label class="control-label" for="DTM02_PurchaseOrderDate-<%= count %>">Date/Time</label>
                     <input type="date" class="form-control" id="DTM02_PurchaseOrderDate-<%= count %>">

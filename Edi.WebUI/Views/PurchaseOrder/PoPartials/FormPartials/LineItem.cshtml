@@ -55,22 +55,14 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="control-label" for="PO107_ProductID-<%= count %>">Product ID</label>
-                    <input type="text" class="form-control" id="PO107_ProductID-<%= count %>" placeholder="">
-                </div>
-            </div>
         </div>
         @*<div class="form-group">
             <label class="control-label" for="PO101_AssignedIdentification">AssignedIdentification</label>
             <input type="hidden" class="form-control" id="PO101_AssignedIdentification" value="">
         </div>*@
+        <input id="btnAddLineItem" type="button" value="Add Line Item" class="btn btn-default" />
+        <% if(count !== 0) { %>
+        <input id="btnRemoveLineItem" type="button" value="Remove Line Item" class="btn btn-default" data-count="<%= count %>" />
+        <% } %>
     </fieldset>
-    <input id="btnAddLineItem" type="button" value="Add Line Item" class="btn btn-default" />
-    <% if(count !== 0) { %>
-    <input id="btnRemoveLineItem" type="button" value="Remove Line Item" class="btn btn-default" data-count="<%= count %>" />
-    <% } %>
-
-    <hr />
 </div>

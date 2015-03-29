@@ -7,12 +7,18 @@
         text: 'Scripts/text',
         signalr: 'Scripts/jquery.signalR-2.2.0',
         hubs: '/signalr/hubs?noext',
+        moment: 'Scripts/moment',
         models: 'Scripts/app/pos/models',
         collections: 'Scripts/app/pos/collections',
         views: 'Scripts/app/pos/views',
         routers: 'Scripts/app/pos/routers',
         components: 'Scripts/app/pos/components'/*,
         modalDialog: 'lib/backbone.ModalDialog/backbone.ModalDialog'*/
+    },
+    config: {
+        moment: {
+            noGlobal: true
+        }
     },
     shim: {
         'backbone': {
@@ -30,8 +36,10 @@
 
 var app = app || {};
 
-require(['routers/router', 'components/dataService'],
-function(router, dataService) {
+require(['routers/router', 'components/dataService', 'moment'],
+function(router, dataService, moment) {
+
+    app.moment = moment;
     $(function() {
         dataService.getData().then(function() {
             router.start();

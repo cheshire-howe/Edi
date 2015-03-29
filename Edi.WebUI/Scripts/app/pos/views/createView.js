@@ -20,7 +20,8 @@
             'click #btnRemoveLineItem': 'removeLineItem',
             'click #btnAddDtm': 'addDtm',
             'click #btnRemoveDtm': 'removeDtm',
-            'click .close': 'closeError'
+            'click .close': 'closeError',
+            'focus .form-control': 'resetError'
         },
 
         $cache: {
@@ -71,8 +72,7 @@
             };
             // so this is gonna find the dtms id and should put whatever text in that node
             var dtmTmpl = _.template(this.$cache.dtmForm);
-            // I think we were appending text, but it needed to be a dom node
-            // only the second one slides, don't ask me why
+            // Append a dom node
             $(dtmTmpl(data)).appendTo(this.$el.find('#dtms')).hide().slideDown();
 
             this.$cache.dtmCount++;
@@ -93,7 +93,10 @@
 
             if (this.model.set(this.getCurrentFormValues(), { validate: true })) {
                 dataService.createPo(self.model).then(function(newPo) {
+                    $('#btnSave').removeClass('btn-default');
+                    $('#btnSave').addClass('btn-success');
                     self.$cache.lineItemCount = 0;
+                    self.$cache.dtmCount = 0;
                     app.pos.add(newPo);
                     app.pos.get(newPo.ID);
                     Router.navigate('', { trigger: true });
@@ -101,6 +104,8 @@
             } else {
                 $('#errorMsg').text(this.model.validationError);
                 $('#validationError').slideDown();
+                $('#btnSave').removeClass('btn-default');
+                $('#btnSave').addClass('btn-danger');
             }
         },
 
@@ -108,11 +113,30 @@
             $('#validationError').slideUp();
         },
 
+        resetError: function() {
+            $('#btnSave').removeClass('btn-danger');
+            $('#btnSave').addClass('btn-default');
+        },
+
         back: function() {
             Backbone.history.history.back();
         },
 
         getCurrentFormValues: function() {
+            var today = app.moment();
+            today = today.add(today.utcOffset());
+
+            var dtms = [];
+            for (var j = 0; j < this.$cache.dtmCount; j++) {
+                if ($('#dtm-' + j).is('html *')) {
+                    var dtm = {
+                        DTM01_DateTimeQualifier: $('#DTM01_DateTimeQualifier-' + j).val(),
+                        DTM02_PurchaseOrderDate: $('#DTM02_PurchaseOrderDate-' + j).val()
+                    };
+                    dtms.push(dtm);
+                }
+            }
+
             var lineItems = [];
             for (var i = 0; i < this.$cache.lineItemCount; i++) {
                 if ($('#line-item-' + i).is('html *')) {
@@ -127,8 +151,53 @@
                     lineItems.push(item);
                 }
             }
+
+            var envelope = {
+                "ISA01_AuthInfoQualifier": "00",
+                "ISA02_AuthInfo": "          ",
+                "ISA03_SecurityInfoQualifier": "00",
+                "ISA04_SecurityInfo": "          ",
+                //"ISA05_InterchangeSenderIdQualifier": "01",
+                //"ISA06_InterchangeSenderId": "828513080      ",
+                //"ISA07_InterchangeReceiverIdQualifier": "01",
+                //"ISA08_InterchangeReceiverId": "001903202U     ",
+                "ISA09_Date": today.format(),
+                "ISA10_Time": today.format('HHmm'),
+                "ISA11_InterchangeControlStandardsIdentifier": "U",
+                "ISA12_InterchangeControlVersionNumber": "00401",
+                "ISA13_InterchangeControlNumber": "000000000",
+                "ISA14_AcknowledgmentRequested": "0",
+                "ISA15_UsageIndicator": "P",
+                "ISA16_ComponentElementSeparator": "~",
+                "IEA01_NumberOfIncludedFunctionalGroups": "1",
+                "IEA02_InterchangeControlNumber": "000000000",
+                "GS01_FunctionalIdentifierCode": "PO",
+                //"GS02_ApplicationSenderCode": "828513080",
+                //"GS03_ApplicationReceiverCode": "001903202U",
+                "GS04_Date": today.format(),
+                "GS05_Time": today.format('HHmm'),
+                "GS06_GroupControlNumber": "245",
+                "GS07_ResponsibleAgencyCode": "X",
+                "GS08_Version": "004010",
+                "GE01_NumberOfTransactionSetsIncluded": "1",
+                "GE02_GroupControlNumber": "245",
+                "ST01_TransactionSetIdentifierCode": "850",
+                "ST02_TransactionSetControlNumber": "0001",
+                //"SE01_NumberOfIncludedSegments": "36",
+                "SE02_TransactionSetControlNumber": "0001"
+            };
+
             return {
-                Items: lineItems
+                BEG01_TransactionSetPurposeCode: "00",
+                BEG02_PurchaseOrderTypeCode: "SA",
+                BEG03_PurchaseOrderNumber: "8888",
+                BEG05_Date: today.format(),
+                CUR01_CurrencyEntityIdentifierCode: "SE",
+                CUR02_CurrencyCode: "USD",
+                CTT01_NumberofLineItems: lineItems.length,
+                PoEnvelope: envelope,
+                Items: lineItems,
+                Dtms: dtms
             };
         }
     });
