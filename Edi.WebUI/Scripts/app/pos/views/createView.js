@@ -6,9 +6,11 @@
     'routers/router',
     'components/dataService',
     'text!PurchaseOrder/PoCreate',
+    'text!PurchaseOrder/PoDtm',
     'text!PurchaseOrder/PoLineItem',
-    'text!PurchaseOrder/PoDtm'
-], function($, _, Backbone, Po, Router, dataService, CreateTmpl, LineItemTmpl, DtmTmpl) {
+    'text!PurchaseOrder/PoItemDtm'
+], function($, _, Backbone, Po, Router, dataService, CreateTmpl, DtmTmpl, LineItemTmpl,
+            ItemDtmTmpl) {
     var poCreateView = Backbone.View.extend({
         template: _.template(CreateTmpl),
         tagName: 'div',
@@ -16,36 +18,63 @@
         events: {
             'click #btnSave': 'createPo',
             'click #btnBack': 'back',
-            'click #btnAddLineItem': 'addLineItem',
-            'click #btnRemoveLineItem': 'removeLineItem',
             'click #btnAddDtm': 'addDtm',
             'click #btnRemoveDtm': 'removeDtm',
+            'click #btnAddLineItem': 'addLineItem',
+            'click #btnRemoveLineItem': 'removeLineItem',
+            'click #btnAddItemDtm': 'addItemDtm',
+            'click #btnRemoveItemDtm': 'removeItemDtm',
             'click .close': 'closeError',
             'focus .form-control': 'resetError'
         },
 
         $cache: {
-            lineItemForm: null,
             dtmForm: null,
+            lineItemForm: null,
+            itemDtmForm: null,
+            dtmCount: 0,
             lineItemCount: 0,
-            dtmCount: 0
+            itemDtmCount: 0
         },
 
         initialize: function() {
             this.model = new Po();
-            this.$cache.lineItemForm = LineItemTmpl;
             this.$cache.dtmForm = DtmTmpl;
-            this.$cache.lineItemCount = 0;
+            this.$cache.lineItemForm = LineItemTmpl;
+            this.$cache.itemDtmForm = ItemDtmTmpl;
             this.$cache.dtmCount = 0;
+            this.$cache.lineItemCount = 0;
+            this.$cache.itemDtmCount = 0;
         },
 
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));
 
-            this.addLineItem();
             this.addDtm();
+            this.addLineItem();
 
             return this;
+        },
+
+        addDtm: function() {
+            var data = {
+                count: this.$cache.dtmCount
+            };
+            // so this is gonna find the dtms id and should put whatever text in that node
+            var dtmTmpl = _.template(this.$cache.dtmForm);
+            // Append a dom node
+            $(dtmTmpl(data)).appendTo(this.$el.find('#dtms')).hide().slideDown();
+
+            this.$cache.dtmCount++;
+        },
+
+        removeDtm: function(e) {
+            if (confirm("Are you sure you want to remove this date/time?")) {
+                var dtmNumber = $(e.currentTarget).data('count');
+                $('#dtm-' + dtmNumber).slideUp('slow', function() {
+                    this.remove();
+                });
+            }
         },
 
         addLineItem: function() {
@@ -68,23 +97,34 @@
             }
         },
 
-        addDtm: function() {
-            var data = {
-                count: this.$cache.dtmCount
-            };
-            // so this is gonna find the dtms id and should put whatever text in that node
-            var dtmTmpl = _.template(this.$cache.dtmForm);
-            // Append a dom node
-            $(dtmTmpl(data)).appendTo(this.$el.find('#dtms')).hide().slideDown();
+        addItemDtm: function(e) {
+            var lineItemCount = $(e.currentTarget).data('count');
+            var lineItemEl = '#item-dtms-' + lineItemCount;
 
-            this.$cache.dtmCount++;
+            $(this.$el.find('#item-dtms-div-' + lineItemCount)).show();
+
+            var data = {
+                count: this.$cache.itemDtmCount,
+                lineItemCount: lineItemCount
+            };
+
+            var itemDtmTmpl = _.template(this.$cache.itemDtmForm);
+            $(itemDtmTmpl(data)).appendTo(this.$el.find(lineItemEl)).hide().slideDown();
+
+            this.$cache.itemDtmCount++;
         },
 
-        removeDtm: function(e) {
-            if (confirm("Are you sure you want to remove this date/time?")) {
-                var dtmNumber = $(e.currentTarget).data('count');
-                $('#dtm-' + dtmNumber).slideUp('slow', function() {
+        removeItemDtm: function(e) {
+            var itemDtmNumber = $(e.currentTarget).data('count');
+            var lineItemNumber = $(e.currentTarget).data('lineitem');
+
+            if (confirm("Are you sure you want to remove this line item date?")) {
+                $('#item-dtm-' + itemDtmNumber).slideUp('slow', function() {
                     this.remove();
+
+                    if ($('#item-dtms-' + lineItemNumber).is(':empty')) {
+                        $('#item-dtms-div-' + lineItemNumber).slideUp();
+                    }
                 });
             }
         },
@@ -138,6 +178,8 @@
             var lineItems = [];
             for (var i = 0; i < this.$cache.lineItemCount; i++) {
                 if ($('#line-item-' + i).is('html *')) {
+
+                    // Each Line Item
                     var item = {
                         PO102_QuantityOrdered: $('#PO102_QuantityOrdered-' + i).val(),
                         PO103_UnitOfMeasurement: $('#PO103_UnitOfMeasurement-' + i).val(),
@@ -146,6 +188,25 @@
                         PO106_ProductIdQualifier: $('#PO106_ProductIdQualifier-' + i).val(),
                         PO107_ProductID: $('#PO107_ProductID-' + i).val()
                     };
+
+                    // Dtm for each Line Item
+                    var itemDtms = [];
+                    for (var l = 0; l < this.$cache.itemDtmCount; l++) {
+                        if ($('#item-dtms-' + i + ' > #item-dtm-' + l).is('html *')) {
+                            var itemDtm = {
+                                DTM01_DateTimeQualifier: $('#item-DTM01_DateTimeQualifier-' + l).val(),
+                                DTM02_PurchaseOrderDate: $('#item-DTM02_PurchaseOrderDate-' + l).val()
+                            };
+                            itemDtms.push(itemDtm);
+                        }
+                    }
+
+                    // Push Item Dtm, if any, to the individual line item
+                    if (itemDtms.length > 0) {
+                        item.Dtms = itemDtms;
+                    }
+
+                    // Push the Line Item to the array of Items
                     lineItems.push(item);
                 }
             }

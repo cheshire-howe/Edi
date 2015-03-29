@@ -60,6 +60,34 @@
                     attrs.Items[i].PO102_QuantityOrdered === "") {
                     return "You are missing line item values";
                 }
+
+                // Validate Item Dtm
+                for (var i1 = 0; i1 < attrs.Items[i].Dtms.length; i1++) {
+
+                    // Check no two dtms have same qualifier
+                    for (var k1 = 0; k1 < attrs.Items[i].Dtms.length; k1++) {
+                        if (i1 != k1) {
+                            if (attrs.Items[i].Dtms[i1].DTM01_DateTimeQualifier === attrs.Items[i].Dtms[k1].DTM01_DateTimeQualifier) {
+                                return "Repeated Dtm";
+                            }
+                        }
+                    }
+
+                    // Check date is not empty
+                    if (attrs.Items[i].Dtms[i1].DTM02_PurchaseOrderDate === "") {
+                        return "Please remember to enter the line item date";
+                    }
+
+                    // Get date in right format
+                    var poItemDate = new Date(attrs.Items[i].Dtms[i1].DTM02_PurchaseOrderDate);
+                    var offset2 = poItemDate.getTimezoneOffset();
+                    poItemDate.setMinutes(offset2);
+
+                    // Check it is after today
+                    if (poItemDate < today) {
+                        return "Please enter a date that is today or later for line item date";
+                    }
+                }
             }
         }
     });

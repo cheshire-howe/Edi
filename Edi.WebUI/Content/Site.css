@@ -33,6 +33,11 @@ fieldset {
     margin: 15px 0
 }
 
+.form-section-inner {
+    width: 90%;
+    margin-left: 5%;
+}
+
 #validationError {
     position: fixed;
     top: 75px;
