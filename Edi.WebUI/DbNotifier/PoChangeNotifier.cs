@@ -31,6 +31,7 @@ namespace Edi.WebUI.DbNotifier
                     var dependency = new SqlDependency(command);
                     dependency.OnChange += new OnChangeEventHandler(dependency_OnChange);
 
+                    // Must execute reader to make things go
                     using (var reader = command.ExecuteReader())
                     {
                     }

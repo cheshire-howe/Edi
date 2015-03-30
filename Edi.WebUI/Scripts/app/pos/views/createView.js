@@ -122,6 +122,8 @@
                 $('#item-dtm-' + itemDtmNumber).slideUp('slow', function() {
                     this.remove();
 
+                    // This checks if item-dtms-0 has children then hides its parent
+                    // Inside the callback of hiding the dtm form
                     if ($('#item-dtms-' + lineItemNumber).is(':empty')) {
                         $('#item-dtms-div-' + lineItemNumber).slideUp();
                     }
@@ -176,7 +178,9 @@
             }
 
             var lineItems = [];
+            // Loop through each possible lineitem
             for (var i = 0; i < this.$cache.lineItemCount; i++) {
+                // Check that lineitem wasn't removed from the DOM
                 if ($('#line-item-' + i).is('html *')) {
 
                     // Each Line Item
@@ -192,6 +196,7 @@
                     // Dtm for each Line Item
                     var itemDtms = [];
                     for (var l = 0; l < this.$cache.itemDtmCount; l++) {
+                        // Checks that the dtm is a child of this lineitem
                         if ($('#item-dtms-' + i + ' > #item-dtm-' + l).is('html *')) {
                             var itemDtm = {
                                 DTM01_DateTimeQualifier: $('#item-DTM01_DateTimeQualifier-' + l).val(),

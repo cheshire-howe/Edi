@@ -49,13 +49,17 @@ function($, router, dataService, moment) {
 
     app.moment = moment;
 
+    // Create the websocket connection
     app.socket = $.connection.poHub;
 
+    // Define client-side methods that the server can call
     app.socket.client.updatePos = function() {
         app.pos.fetch();
     };
 
+    // Start the websocket conversation
     $.connection.hub.start({ waitForPageLoad: false }).done(function() {
+        // Call the server-side method
         app.socket.server.start();
 
         dataService.getData().then(function() {
