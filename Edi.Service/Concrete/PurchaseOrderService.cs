@@ -49,6 +49,13 @@ namespace Edi.Service.Concrete
             _unitOfWork.Commit();
         }
 
+        public async Task CreateAsync(PurchaseOrder entity)
+        {
+            entity.UserID = "41d00c91-1642-4a1b-b3d0-c07aea218c64";
+            _unitOfWork.PurchaseOrderRepository.Add(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
         public IEnumerable<PurchaseOrder> GetAll()
         {
             return _unitOfWork.PurchaseOrderRepository.GetAll();
@@ -64,10 +71,21 @@ namespace Edi.Service.Concrete
             return _unitOfWork.PurchaseOrderRepository.GetById(id);
         }
 
+        public async Task<PurchaseOrder> GetByIdAsync(int id)
+        {
+            return await _unitOfWork.PurchaseOrderRepository.GetByIdAsync(id);
+        }
+
         public void Update(PurchaseOrder entity)
         {
             _unitOfWork.PurchaseOrderRepository.Edit(entity);
             _unitOfWork.Commit();
+        }
+
+        public async Task UpdateAsync(PurchaseOrder entity)
+        {
+            _unitOfWork.PurchaseOrderRepository.Edit(entity);
+            await _unitOfWork.CommitAsync();
         }
 
         public void Delete(PurchaseOrder entity)
@@ -76,6 +94,10 @@ namespace Edi.Service.Concrete
             _unitOfWork.Commit();
         }
 
-        
+        public async Task DeleteAsync(PurchaseOrder entity)
+        {
+            _unitOfWork.PurchaseOrderRepository.Delete(entity);
+            await _unitOfWork.CommitAsync();
+        }
     }
 }

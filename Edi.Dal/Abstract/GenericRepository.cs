@@ -14,7 +14,7 @@ namespace Edi.Dal.Abstract
         protected DbContext _entities;
         protected readonly DbSet<T> _dbSet;
 
-        public GenericRepository(DbContext context)
+        protected GenericRepository(DbContext context)
         {
             _entities = context;
             _dbSet = context.Set<T>();

@@ -56,6 +56,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.InvoiceRepository.GetById(id);
         }
 
+        public async Task<Invoice> GetByIdAsync(int id)
+        {
+            return await _unitOfWork.InvoiceRepository.GetByIdAsync(id);
+        }
+
         public void Update(Invoice entity)
         {
             _unitOfWork.InvoiceRepository.Edit(entity);
@@ -66,6 +71,24 @@ namespace Edi.Service.Concrete
         {
             _unitOfWork.InvoiceRepository.Delete(entity);
             _unitOfWork.Commit();
+        }
+
+        public async Task CreateAsync(Invoice entity)
+        {
+            _unitOfWork.InvoiceRepository.Add(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task UpdateAsync(Invoice entity)
+        {
+            _unitOfWork.InvoiceRepository.Edit(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task DeleteAsync(Invoice entity)
+        {
+            _unitOfWork.InvoiceRepository.Delete(entity);
+            await _unitOfWork.CommitAsync();
         }
     }
 }

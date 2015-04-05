@@ -22,7 +22,14 @@ namespace Edi.Dal.Concrete
 
         public Partnership GetById(int id)
         {
-            return _dbSet.FirstOrDefault(x => x.ID == id);
+            return _dbSet
+                .FirstOrDefault(x => x.ID == id);
+        }
+
+        public async Task<Partnership> GetByIdAsync(int id)
+        {
+            return await _dbSet
+                .FirstOrDefaultAsync(x => x.ID == id);
         }
 
         public string GetUserId(string customerId, string vendorId)

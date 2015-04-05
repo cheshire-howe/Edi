@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Edi.Models.AcknowledgmentModels;
 using Edi.Models.AsnModels;
 using Edi.Models.PurchaseOrderModels;
@@ -27,8 +28,12 @@ namespace Edi
             }
 
             //Inv();
+
             //Po();
+            PoAsync();
+
             //Ack();
+
             //Asn();
 
             Console.WriteLine("Done");
@@ -89,6 +94,15 @@ namespace Edi
                 po.Items.ToList().ForEach(x => x.Names.ToList().ForEach(y => Console.WriteLine(y.N102_Name)));
             }*/
             /////////////////////////////////////////////////////
+        }
+
+        private static async Task PoAsync()
+        {
+            var purchaseOrderService = Get.PurchaseOrderService;
+
+            var po = await purchaseOrderService.GetByIdAsync(1);
+
+            Console.WriteLine(po.BEG03_PurchaseOrderNumber);
         }
 
         private static void Ack()

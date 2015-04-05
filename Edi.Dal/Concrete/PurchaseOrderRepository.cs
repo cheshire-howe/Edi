@@ -28,5 +28,15 @@ namespace Edi.Dal.Concrete
                 .Include(x => x.Refs)
                 .FirstOrDefault(x => x.ID == id);
         }
+
+        public async Task<PurchaseOrder> GetByIdAsync(int id)
+        {
+            return await _dbSet
+                .Include(x => x.Dtms)
+                .Include(x => x.Items)
+                .Include(x => x.Names)
+                .Include(x => x.Refs)
+                .FirstOrDefaultAsync(x => x.ID == id);
+        } 
     }
 }

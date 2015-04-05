@@ -23,5 +23,11 @@ namespace Edi.Dal.Concrete
         {
             return _dbSet.FirstOrDefault(x => x.ID == id);
         }
+
+        public async Task<Asn> GetByIdAsync(int id)
+        {
+            return await _dbSet
+                .FirstOrDefaultAsync(x => x.ID == id);
+        }
     }
 }

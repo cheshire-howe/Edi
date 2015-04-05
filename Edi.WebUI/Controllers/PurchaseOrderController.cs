@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Edi.Models.PurchaseOrderModels;
-using Edi.Service.Interfaces;
+﻿using System.Web.Mvc;
 
 namespace Edi.WebUI.Controllers
 {

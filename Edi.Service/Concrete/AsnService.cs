@@ -50,6 +50,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.AsnRepository.GetById(id);
         }
 
+        public async Task<Asn> GetByIdAsync(int id)
+        {
+            return await _unitOfWork.AsnRepository.GetByIdAsync(id);
+        }
+
         public void Update(Asn entity)
         {
             _unitOfWork.AsnRepository.Edit(entity);
@@ -60,6 +65,24 @@ namespace Edi.Service.Concrete
         {
             _unitOfWork.AsnRepository.Delete(entity);
             _unitOfWork.Commit();
+        }
+
+        public async Task CreateAsync(Asn entity)
+        {
+            _unitOfWork.AsnRepository.Add(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task UpdateAsync(Asn entity)
+        {
+            _unitOfWork.AsnRepository.Edit(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task DeleteAsync(Asn entity)
+        {
+            _unitOfWork.AsnRepository.Delete(entity);
+            await _unitOfWork.CommitAsync();
         }
     }
 }

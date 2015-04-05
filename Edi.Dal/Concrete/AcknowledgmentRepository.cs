@@ -25,6 +25,12 @@ namespace Edi.Dal.Concrete
                 .FirstOrDefault(x => x.ID == id);
         }
 
+        public async Task<Acknowledgment> GetByIdAsync(int id)
+        {
+            return await _dbSet
+                .FirstOrDefaultAsync(x => x.ID == id);
+        }
+
         public override IEnumerable<Acknowledgment> GetAll()
         {
             return _dbSet

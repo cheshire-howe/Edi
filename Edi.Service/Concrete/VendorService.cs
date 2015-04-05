@@ -34,6 +34,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.VendorRepository.GetById(id);
         }
 
+        public async Task<Vendor> GetByIdAsync(int id)
+        {
+            return await _unitOfWork.VendorRepository.GetByIdAsync(id);
+        }
+
         public void Update(Vendor entity)
         {
             _unitOfWork.VendorRepository.Edit(entity);
@@ -44,6 +49,24 @@ namespace Edi.Service.Concrete
         {
             _unitOfWork.VendorRepository.Delete(entity);
             _unitOfWork.Commit();
+        }
+
+        public async Task CreateAsync(Vendor entity)
+        {
+            _unitOfWork.VendorRepository.Add(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task UpdateAsync(Vendor entity)
+        {
+            _unitOfWork.VendorRepository.Edit(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task DeleteAsync(Vendor entity)
+        {
+            _unitOfWork.VendorRepository.Delete(entity);
+            await _unitOfWork.CommitAsync();
         }
     }
 }

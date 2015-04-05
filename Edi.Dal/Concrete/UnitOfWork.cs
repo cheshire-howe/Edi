@@ -47,6 +47,24 @@ namespace Edi.Dal.Concrete
             // Save changes with the default options
         }
 
+        /// <summary>
+        /// Saves all pending changes asynchronously
+        /// </summary>
+        /// <returns>The number of objects in an Added, Modified or Deleted state</returns>
+        public async Task<int> CommitAsync()
+        {
+            try
+            {
+                return await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+            // Save changes with the default options
+        }
+
         #region Repositories
 
         /// <summary>

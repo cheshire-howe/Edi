@@ -201,6 +201,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PartnershipController.cs" />
+    <Compile Include="Controllers\PurchaseOrderApiAsyncController.cs" />
     <Compile Include="Controllers\PurchaseOrderApiController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\RoleController.cs" />

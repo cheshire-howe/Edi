@@ -30,6 +30,16 @@ namespace Edi.Dal.Concrete
                 .FirstOrDefault(x => x.ID == id);
         }
 
+        public async Task<Invoice> GetByIdAsync(int id)
+        {
+            return await _dbSet
+                .Include(x => x.Names)
+                .Include(x => x.Notes)
+                .Include(x => x.Items)
+                .Include(x => x.Refs)
+                .FirstOrDefaultAsync(x => x.ID == id);
+        }
+
         public override IEnumerable<Invoice> GetAll()
         {
             return _dbSet

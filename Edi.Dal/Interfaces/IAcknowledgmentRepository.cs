@@ -10,5 +10,6 @@ namespace Edi.Dal.Interfaces
     public interface IAcknowledgmentRepository : IGenericRepository<Acknowledgment>
     {
         Acknowledgment GetById(int id);
+        Task<Acknowledgment> GetByIdAsync(int id);
     }
 }

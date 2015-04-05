@@ -34,6 +34,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.PartnershipRepository.GetById(id);
         }
 
+        public async Task<Partnership> GetByIdAsync(int id)
+        {
+            return await _unitOfWork.PartnershipRepository.GetByIdAsync(id);
+        }
+
         public string GetUserId(string customerId, string vendorId)
         {
             customerId = customerId.Trim();
@@ -51,6 +56,24 @@ namespace Edi.Service.Concrete
         {
             _unitOfWork.PartnershipRepository.Delete(entity);
             _unitOfWork.Commit();
+        }
+
+        public async Task CreateAsync(Partnership entity)
+        {
+            _unitOfWork.PartnershipRepository.Add(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task UpdateAsync(Partnership entity)
+        {
+            _unitOfWork.PartnershipRepository.Edit(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task DeleteAsync(Partnership entity)
+        {
+            _unitOfWork.PartnershipRepository.Delete(entity);
+            await _unitOfWork.CommitAsync();
         }
     }
 }

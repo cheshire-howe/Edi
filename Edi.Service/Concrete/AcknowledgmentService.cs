@@ -51,6 +51,11 @@ namespace Edi.Service.Concrete
             return _unitOfWork.AcknowledgmentRepository.GetById(id);
         }
 
+        public async Task<Acknowledgment> GetByIdAsync(int id)
+        {
+            return await _unitOfWork.AcknowledgmentRepository.GetByIdAsync(id);
+        }
+
         public void Update(Acknowledgment entity)
         {
             _unitOfWork.AcknowledgmentRepository.Edit(entity);
@@ -61,6 +66,25 @@ namespace Edi.Service.Concrete
         {
             _unitOfWork.AcknowledgmentRepository.Delete(entity);
             _unitOfWork.Commit();
+        }
+
+
+        public async Task CreateAsync(Acknowledgment entity)
+        {
+            _unitOfWork.AcknowledgmentRepository.Add(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task UpdateAsync(Acknowledgment entity)
+        {
+            _unitOfWork.AcknowledgmentRepository.Edit(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task DeleteAsync(Acknowledgment entity)
+        {
+            _unitOfWork.AcknowledgmentRepository.Delete(entity);
+            await _unitOfWork.CommitAsync();
         }
     }
 }
